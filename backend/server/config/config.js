@@ -64,7 +64,8 @@ const config = convict({
     host: {
       doc: 'Database host name/IP',
       format: String,
-      default: 'localhost',
+      default: 'host.docker.internal',
+      // default: 'localhost',
       env: 'DB_HOST',
     },
     database: {
@@ -621,7 +622,8 @@ const config = convict({
     url: {
       doc: 'The URI to redirect users to the Redis',
       format: String,
-      default: 'redis://localhost:6379',
+      default: 'redis://sfc-redis:6379',
+      // default: 'redis://localhost:6379',
     },
     serviceName: {
       doc: 'Name of VCAP Service for Redis',
