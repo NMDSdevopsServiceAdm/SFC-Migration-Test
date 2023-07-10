@@ -1,0 +1,61 @@
+<dl class="govuk-list--tab">
+  <div class="govuk-list--tab__column">
+    <dt data-testid="totalStaffNumber" *ngIf="totalStaff">
+      {{ totalStaff }}
+    </dt>
+    <dd data-testid="totalStaffText">
+      <span>{{ !totalStaff ? 'Total' : 'total' }} number of staff {{ !totalStaff ? 'is missing' : '' }}</span>
+    </dd>
+    <dd data-testid="totalStaffLink">
+      <a
+        *ngIf="canEditEstablishment"
+        [routerLink]="['/workplace', workplace.uid, 'staff-record', 'total-staff']"
+        class="govuk-!-font-size-19 govuk-!-font-weight-regular govuk-!-padding-right-9 govuk-!-margin-right-9"
+        [ngClass]="{ 'govuk-!-padding-right-9 govuk-!-margin-right-9': !totalStaff }"
+        (click)="setReturn()"
+      >
+        {{ totalStaff ? 'Change' : 'Add' }} <span class="govuk-visually-hidden"> total number of staff</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-list--tab__column">
+    <dt data-testid="staffAddedNumber">
+      {{ totalWorkers }}
+    </dt>
+    <dd data-testid="staffAddedText">
+      staff
+      <ng-container [ngPlural]="totalWorkers">
+        <ng-template ngPluralCase="=1">record</ng-template>
+        <ng-template ngPluralCase="other">records</ng-template>
+      </ng-container>
+      added
+    </dd>
+  </div>
+
+  <ng-container *ngIf="totalStaff && totalStaff !== totalWorkers">
+    <div class="govuk-list--tab__column">
+      <dt data-testid="changeNumber">
+        <img
+          src="/assets/images/flag-orange.svg"
+          alt="Missing or expired record alert"
+          class="govuk-!-margin-right-1"
+        />
+        <ng-container *ngIf="totalStaff > totalWorkers; else totalDelete">
+          {{ totalStaff - totalWorkers }}
+        </ng-container>
+        <ng-template #totalDelete> {{ totalWorkers - totalStaff }} </ng-template>
+      </dt>
+      <dd data-testid="changeText">
+        staff
+        <ng-container [ngPlural]="totalStaff - totalWorkers">
+          <ng-template ngPluralCase="=-1">record</ng-template>
+          <ng-template ngPluralCase="=1">record</ng-template>
+          <ng-template ngPluralCase="other">records</ng-template>
+        </ng-container>
+        to
+        <ng-container *ngIf="totalStaff > totalWorkers; else deleteText">add</ng-container>
+        <ng-template #deleteText>delete</ng-template>
+      </dd>
+    </div>
+  </ng-container>
+</dl>

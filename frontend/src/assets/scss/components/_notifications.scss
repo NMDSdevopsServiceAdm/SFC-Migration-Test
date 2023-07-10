@@ -1,0 +1,70 @@
+.notification-alert {
+  background: rgba(govuk-colour('blue'), 0.15);
+  padding: 14px;
+  display: block;
+  @include govuk-font($size: 16, $weight: 400);
+  text-decoration: none;
+  &:visited {
+    color: govuk-colour('black');
+  }
+  &:active {
+    background: rgba(govuk-colour('blue'), 0.15);
+  }
+
+  &__count {
+    color: govuk-colour('white');
+    background: #d4351c;
+    border-radius: 50%;
+    padding: 3px;
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+    margin-left: 8px;
+    margin-right: 6px;
+  }
+}
+
+.notification-list-row {
+  background: none;
+
+  &--unread {
+    background: govuk-colour('light-grey');
+    font-weight: bold;
+  }
+}
+
+.notification-list-item {
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    margin-top: 12px;
+    width: 80%;
+    height: 80%;
+    display: inline-block;
+  }
+}
+
+.notification-list-item__link {
+  color: govuk-colour('blue');
+  margin-top: 6px;
+  &:visited {
+    margin-top: 5px;
+    color: govuk-colour('blue');
+  }
+}
+
+.notification-tag {
+  font-weight: normal;
+  padding: 5px 10px;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+
+  &--view-only {
+    background: govuk-colour('turquoise');
+  }
+  &--edit {
+    background: govuk-colour('yellow');
+  }
+}

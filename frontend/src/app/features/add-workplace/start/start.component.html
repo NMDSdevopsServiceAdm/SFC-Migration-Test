@@ -1,0 +1,21 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">Add a new workplace</h1>
+    </legend>
+
+    <p>To add a new workplace, you'll need to know:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>their main service and whether it's regulated by the Care Quality Commission (CQC)</li>
+      <li>the name and address of the workplace</li>
+      <li>what type of employer they are (for example, local authority, private)</li>
+      <li>how many members of staff the workplace has</li>
+    </ul>
+
+    <div class="govuk-button-group govuk-!-margin-top-8">
+      <a [routerLink]="['/add-workplace', 'regulated-by-cqc']" role="button" draggable="false" class="govuk-button">
+        Continue
+      </a>
+    </div>
+  </div>
+</div>

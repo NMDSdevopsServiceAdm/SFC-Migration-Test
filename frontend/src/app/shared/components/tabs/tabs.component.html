@@ -1,0 +1,37 @@
+<div class="govuk-tabs" data-module="tabs"></div>
+
+<ul class="govuk-tabs__list" role="tablist" #tablist data-cy="tab-list">
+  <ng-container *ngFor="let tab of tabs; let i = index">
+    <li class="govuk-tabs__list-item" [class.govuk-tabs__list-item--selected]="tab.active">
+      <a
+        id="tab_{{ tab.slug }}"
+        class="govuk-tabs__tab"
+        [class.govuk-tabs__tab--selected]="tab.active"
+        href="#{{ tab.slug }}"
+        role="tab"
+        [attr.aria-controls]="tab.slug"
+        [attr.aria-selected]="tab.active"
+        [attr.tabindex]="tab.active ? 0 : -1"
+        (click)="selectTab($event, i)"
+        (keyup)="onKeyUp($event)"
+        (keydown)="onKeyDown($event)"
+        [attr.data-testid]="'tab_' + tab.slug"
+      >
+        {{ tab.title }}
+      </a>
+
+      <i
+        [class.govuk-tabs__tab--alert]="tab.alert"
+        [class.govuk-tabs__tab--red-alert]="tab.redAlert"
+        [class.govuk-tabs__tab--green-tick]="tab.greenTick"
+        [class.govuk-tabs__tab--red-cross]="tab.redCross"
+      >
+        <span *ngIf="tab.alert" class="govuk-visually-hidden" data-testid="orange-flag">Orange warning flag</span>
+        <span *ngIf="tab.redAlert" class="govuk-visually-hidden" data-testid="red-flag">Red warning flag</span>
+        <span *ngIf="tab.redCross" class="govuk-visually-hidden">Red cross</span>
+        <span *ngIf="tab.greenTick" class="govuk-visually-hidden">Green tick</span>
+      </i>
+    </li>
+  </ng-container>
+</ul>
+<ng-content></ng-content>

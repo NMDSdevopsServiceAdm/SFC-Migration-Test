@@ -1,0 +1,23 @@
+@import '@angular/cdk/_index.scss';
+
+$cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.5);
+$backdrop-animation-duration: 0ms !default;
+
+@include overlay();
+
+.cdk-overlay-pane {
+  background: govuk-colour('white');
+  @include govuk-responsive-padding(6, 'top');
+  @include govuk-responsive-padding(7, 'left');
+  @include govuk-responsive-padding(2, 'bottom');
+  @include govuk-responsive-padding(7, 'right');
+  max-width: calc(100vh - 30px);
+  max-height: calc(100vh - 30px);
+  overflow-y: auto;
+
+  @include govuk-media-query($from: tablet) {
+    max-width: 640px;
+    max-height: calc(100vh - 30px);
+    overflow-y: auto;
+  }
+}

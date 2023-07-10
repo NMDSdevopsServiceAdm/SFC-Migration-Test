@@ -1,0 +1,112 @@
+<span class="govuk-caption-l">Benchmarks</span>
+<h1 class="govuk-heading-l">Rankings</h1>
+
+<div class="govuk-!-margin-bottom-9">
+  <p class="govuk-body">
+    <strong>Your comparison group</strong>
+    <ng-container *ngIf="metaDataAvailable; else noMetaData">
+      data and ranking was last updated {{ lastUpdated | date: 'd MMMM yyyy' }}.
+    </ng-container>
+    <ng-template #noMetaData> information is not available. </ng-template>
+  </p>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half-from-desktop">
+    <h2 class="govuk-heading-m">
+      {{ metricContent['Pay'].title
+      }}<span *ngIf="tilesData.careWorkerPay.workplaceValue.hasValue"
+        >: {{ tilesData.careWorkerPay.workplaceValue.value | formatMoney }}</span
+      >
+    </h2>
+  </div>
+  <div class="govuk-grid-column-one-half-from-desktop">
+    <p class="govuk-util__align-right">
+      <a class="govuk-link" [routerLink]="['..', 'pay']">View your pay benchmarks</a>
+    </p>
+  </div>
+</div>
+<p>{{ metricContent['Pay'].description }}</p>
+<app-gauge *ngIf="rankings.pay.careWorkerPay" [maxRank]="payContent.maxRank" [currentRank]="payContent.currentRank">
+  <ng-container your-rank>
+    <app-ranking-content *ngIf="payContent" [content]="payContent"></app-ranking-content>
+  </ng-container>
+</app-gauge>
+
+<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-9" />
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half-from-desktop">
+    <h2 class="govuk-heading-m">
+      {{ metricContent['Turnover'].title
+      }}<span *ngIf="tilesData.turnoverRate.workplaceValue.hasValue"
+        >: {{ tilesData.turnoverRate.workplaceValue.value | formatPercent }}</span
+      >
+    </h2>
+  </div>
+  <div class="govuk-grid-column-one-half-from-desktop">
+    <p class="govuk-util__align-right">
+      <a class="govuk-link" [routerLink]="['..', 'turnover']">View your turnover benchmarks</a>
+    </p>
+  </div>
+</div>
+<p>{{ metricContent['Turnover'].description }}</p>
+<app-gauge *ngIf="rankings.turnover" [maxRank]="turnoverContent.maxRank" [currentRank]="turnoverContent.currentRank">
+  <ng-container your-rank>
+    <app-ranking-content *ngIf="turnoverContent" [content]="turnoverContent"></app-ranking-content>
+  </ng-container>
+</app-gauge>
+
+<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-9" />
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half-from-desktop">
+    <h2 class="govuk-heading-m">
+      {{ metricContent['Sickness'].title
+      }}<span *ngIf="tilesData.sickness.workplaceValue.hasValue"
+        >: {{ tilesData.sickness.workplaceValue.value }} Days</span
+      >
+    </h2>
+  </div>
+  <div class="govuk-grid-column-one-half-from-desktop">
+    <p class="govuk-util__align-right">
+      <a class="govuk-link" [routerLink]="['..', 'sickness']">View your sickness benchmarks</a>
+    </p>
+  </div>
+</div>
+<p>{{ metricContent['Sickness'].description }}</p>
+<app-gauge *ngIf="rankings.sickness" [maxRank]="sicknessContent.maxRank" [currentRank]="sicknessContent.currentRank">
+  <ng-container your-rank>
+    <app-ranking-content *ngIf="sicknessContent" [content]="sicknessContent"></app-ranking-content>
+  </ng-container>
+</app-gauge>
+
+<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-9" />
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half-from-desktop">
+    <h2 class="govuk-heading-m">
+      {{ metricContent['Qualifications'].title
+      }}<span *ngIf="tilesData.qualifications.workplaceValue.hasValue"
+        >: {{ tilesData.qualifications.workplaceValue.value | formatPercent }}</span
+      >
+    </h2>
+  </div>
+  <div class="govuk-grid-column-one-half-from-desktop">
+    <p class="govuk-util__align-right">
+      <a class="govuk-link" [routerLink]="['..', 'qualifications']">View your qualifications benchmarks</a>
+    </p>
+  </div>
+</div>
+<p>{{ metricContent['Qualifications'].description }}</p>
+<app-gauge
+  *ngIf="rankings.qualifications"
+  [maxRank]="qualificationsContent.maxRank"
+  [currentRank]="qualificationsContent.currentRank"
+>
+  <ng-container your-rank>
+    <app-ranking-content *ngIf="qualificationsContent" [content]="qualificationsContent"></app-ranking-content>
+  </ng-container>
+</app-gauge>
+
+<hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-9" />

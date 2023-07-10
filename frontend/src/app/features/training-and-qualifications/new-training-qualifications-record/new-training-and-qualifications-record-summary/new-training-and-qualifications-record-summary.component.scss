@@ -1,0 +1,42 @@
+@import 'govuk-frontend/govuk/base';
+
+.asc-summary-box {
+  background-color: govuk-colour('light-grey');
+  display: flex;
+  padding: 10px 20px;
+  font-size: 19px;
+
+  @media only screen and (max-width: 830px) {
+    padding: 15px 20px;
+  }
+
+  @media only screen and (max-width: 510px) {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+}
+
+.asc-total-records {
+  margin-bottom: 0px;
+
+  &--text {
+    font-size: 20px;
+    font-weight: 900;
+    color: $govuk-text-colour;
+    align-self: center;
+
+    @media only screen and (max-width: 690px) {
+      padding-top: 20px;
+    }
+  }
+
+  &--count {
+    font-size: 50px;
+    font-weight: 600;
+    color: govuk-colour('turquoise');
+
+    @media only screen and (max-width: 690px) {
+      display: block;
+    }
+  }
+}

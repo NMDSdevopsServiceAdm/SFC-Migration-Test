@@ -1,0 +1,170 @@
+<div>
+  <table class="govuk-table govuk-!-margin-top-7">
+    <caption class="govuk-table__caption govuk-table__caption--m">
+      Average pay and salaries
+    </caption>
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header"></th>
+        <th
+          scope="col"
+          class="govuk-table__header comparison-table-header govuk-!-text-align-centre govuk-!-padding-right-0"
+        >
+          Your workplace
+        </th>
+        <th scope="col" class="govuk-table__header comparison-table-header govuk-!-text-align-centre">
+          Comparison group
+        </th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body comparison-table-body">
+      <tr class="govuk-table__row first-row" data-testid="careworkerRow">
+        <th scope="row" class="govuk-table__header comparison-row-header govuk-!-font-weight-regular">
+          Care worker pay
+        </th>
+        <td class="govuk-table__cell workplace-cell">
+          {{ careWorkerPay }}
+        </td>
+        <td class="govuk-table__cell comparison-group-cell">
+          {{ comparisonGroupCareWorkerPay }}
+        </td>
+      </tr>
+      <tr class="govuk-table__row" data-testid="seniorCareworkerRow">
+        <th scope="row" class="govuk-table__header comparison-row-header govuk-!-font-weight-regular">
+          Senior care worker pay
+        </th>
+        <td class="govuk-table__cell workplace-cell">
+          {{ seniorCareWorkerPay }}
+        </td>
+        <td class="govuk-table__cell comparison-group-cell">
+          {{ comparisonGroupSeniorCareWorkerPay }}
+        </td>
+      </tr>
+      <tr class="govuk-table__row" data-testid="register-nurse-comparison" *ngIf="showRegisteredNurseSalary">
+        <th scope="row" class="govuk-table__header comparison-row-header govuk-!-font-weight-regular">
+          Registered nurse salary
+        </th>
+        <td class="govuk-table__cell workplace-cell">
+          {{ registeredNurseSalary }}
+        </td>
+        <td class="govuk-table__cell comparison-group-cell">
+          {{ comparisonGroupRegisteredNurseSalary }}
+        </td>
+      </tr>
+      <tr class="govuk-table__row last-row" data-testid="seniorCareworkerRow">
+        <th scope="row" class="govuk-table__header comparison-row-header govuk-!-font-weight-regular">
+          Registered manager salary
+        </th>
+        <td class="govuk-table__cell workplace-cell">
+          {{ registeredManagerSalary }}
+        </td>
+        <td class="govuk-table__cell comparison-group-cell">
+          {{ comparisonGroupRegisteredManagerSalary }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="govuk-width-container govuk-!-margin-top-7">
+    <app-benchmarks-select-view-panel
+      [falseSelectionName]="'Where you rank'"
+      [trueSelectionName]="'Where you\'re positioned'"
+      (handleViewToggle)="handleViewBenchmarkPosition($event)"
+    >
+    </app-benchmarks-select-view-panel>
+
+    <ng-container *ngIf="viewBenchmarksPosition; else showRankings">
+      <div class="govuk-!-margin-top-7" data-testid="barcharts">
+        <app-data-area-barchart
+          [section]="'Care worker pay'"
+          [type]="'careWorkerPay'"
+          [rankingsData]="careWorkerRankings"
+          [altDescription]="'Care worker pay barchart'"
+          [isPay]="true"
+          [noWorkplaceData]="rankings.careWorkerPay.noWorkplaceData"
+        ></app-data-area-barchart>
+        <app-data-area-barchart
+          [section]="'Senior care worker pay'"
+          [type]="'seniorCareWorkerPay'"
+          [rankingsData]="seniorCareWorkerRankings"
+          [altDesrcripton]="'Senior care worker pay barchart'"
+          [isPay]="true"
+          [noWorkplaceData]="rankings.seniorCareWorkerPay.noWorkplaceData"
+        ></app-data-area-barchart>
+        <app-data-area-barchart
+          *ngIf="showRegisteredNurseSalary"
+          [section]="'Registered nurse salary'"
+          [type]="'registeredNursePay'"
+          [rankingsData]="registeredNurseRankings"
+          [altDescription]="'Registered nurse salary barchart'"
+          [isPay]="true"
+          [noWorkplaceData]="rankings.registeredNursePay.noWorkplaceData"
+        ></app-data-area-barchart>
+        <app-data-area-barchart
+          [section]="'Registered manager salary'"
+          [type]="'registeredManagerPay'"
+          [rankingsData]="registeredManagerRankings"
+          [isPay]="true"
+          [noWorkplaceData]="rankings.registeredManagerPay.noWorkplaceData"
+          [altDescription]="'Registered manager salary barchart'"
+        ></app-data-area-barchart>
+      </div>
+    </ng-container>
+    <ng-template #showRankings>
+      <div class="govuk-!-margin-top-7" data-testid="rankings">
+        <app-data-area-ranking
+          [rankingTitle]="rankings.careWorkerPay.title"
+          [workplaceRankNumber]="rankings.careWorkerPay.workplacesRankNumber"
+          [workplacesNumber]="rankings.careWorkerPay.totalWorkplaces"
+          [noWorkplaceData]="rankings.careWorkerPay.noWorkplaceData"
+        ></app-data-area-ranking>
+        <app-data-area-ranking
+          [rankingTitle]="rankings.seniorCareWorkerPay.title"
+          [workplaceRankNumber]="rankings.seniorCareWorkerPay.workplacesRankNumber"
+          [workplacesNumber]="rankings.seniorCareWorkerPay.totalWorkplaces"
+          [noWorkplaceData]="rankings.seniorCareWorkerPay.noWorkplaceData"
+        ></app-data-area-ranking>
+        <app-data-area-ranking
+          *ngIf="showRegisteredNurseSalary"
+          [rankingTitle]="rankings.registeredNursePay.title"
+          [workplaceRankNumber]="rankings.registeredNursePay.workplacesRankNumber"
+          [workplacesNumber]="rankings.registeredNursePay.totalWorkplaces"
+          [noWorkplaceData]="rankings.registeredNursePay.noWorkplaceData"
+        ></app-data-area-ranking>
+        <app-data-area-ranking
+          [rankingTitle]="rankings.registeredManagerPay.title"
+          [workplaceRankNumber]="rankings.registeredManagerPay.workplacesRankNumber"
+          [workplacesNumber]="rankings.registeredManagerPay.totalWorkplaces"
+          [noWorkplaceData]="rankings.registeredManagerPay.noWorkplaceData"
+        ></app-data-area-ranking>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="govuk-!-margin-top-7">
+    <h2 class="govuk-heading-m">Useful links</h2>
+    <app-data-area-useful-link
+      [linkTitle]="'Create a positive place to work'"
+      [linkUrl]="['/positive-workplace']"
+      [linkDescription]="
+        'Creating a positive place to work helps the workforce feel valued, engaged and want to continue working in your workplace.'
+      "
+    ></app-data-area-useful-link>
+
+    <app-data-area-useful-link
+      [linkTitle]="'Maximise recruitment'"
+      [linkUrl]="['/maximise-recruitment']"
+      [linkDescription]="
+        'This webinar shares sector expertise to support you in the recruitment process. Discover top tips and innovative solutions for staff retention and practical ideas from other managers.'
+      "
+    ></app-data-area-useful-link>
+
+    <app-data-area-useful-link
+      [linkTitle]="'Top tips for adult social care workforce retention'"
+      [linkUrl]="['/workplace-retention-top-tips']"
+      [linkDescription]="
+        'Created in partnership with local councils and providers of social care, this guide provides suggestions and resources to help you improve your retention.'
+      "
+    ></app-data-area-useful-link>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<app-error-summary
+  *ngIf="submitted && (form.invalid || serverError)"
+  [formErrorsMap]="formErrorsMap"
+  [form]="form"
+  [serverError]="serverError"
+>
+</app-error-summary>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <form #formEl novalidate (ngSubmit)="onSubmit()" [formGroup]="form" id="server-error">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <span class="govuk-caption-l">Workplace</span>
+          <h1 class="govuk-fieldset__heading">
+            Find {{ flow === 'registration' ? 'your workplace' : 'the workplace' }}
+          </h1>
+        </legend>
+
+        <p>
+          We'll use {{ flow === 'registration' ? 'your' : 'their' }} CQC location ID or workplace postcode to find
+          {{ flow === 'registration' ? 'your' : 'the' }} workplace in the Care Quality Commision database.
+        </p>
+
+        <div class="govuk-form-group" [class.govuk-form-group--error]="submitted && (form.invalid || serverError)">
+          <label class="govuk-label" for="postcodeOrLocationID"> CQC location ID or postcode </label>
+          <span
+            *ngIf="submitted && form.get('postcodeOrLocationID').errors"
+            id="postcodeOrLocationID-error"
+            class="govuk-error-message"
+          >
+            <span class="govuk-visually-hidden">Error:</span>
+            {{ getErrorMessage('postcodeOrLocationID') }}
+          </span>
+          <input
+            class="govuk-input govuk-input--width-10"
+            [formControlName]="'postcodeOrLocationID'"
+            id="postcodeOrLocationID"
+            name="postcodeOrLocationID"
+            [class.govuk-input--error]="submitted && (form.invalid || serverError)"
+            type="text"
+          />
+        </div>
+      </fieldset>
+      <button class="govuk-button govuk-!-margin-top-4" type="submit" data-testid="button">Find workplace</button>
+    </form>
+  </div>
+  <div class="govuk-grid-column-one-third" *ngIf="insideFlow">
+    <div class="govuk-!-margin-left-8">
+      <app-progress-bar
+        data-testid="progress-bar-1"
+        [header]="'Workplace'"
+        [sections]="workplaceSections"
+        [currentSection]="'Find workplace'"
+      ></app-progress-bar>
+      <app-progress-bar
+        *ngIf="this.flow.includes('registration')"
+        data-testid="progress-bar-2"
+        [header]="'User account'"
+        [sections]="userAccountSections"
+        [currentSection]="'Find workplace'"
+      ></app-progress-bar>
+    </div>
+  </div>
+</div>
