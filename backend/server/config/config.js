@@ -624,6 +624,7 @@ const config = convict({
       format: String,
       default: 'redis://sfc-redis:6379',
       // default: 'redis://localhost:6379',
+      env: 'REDIS_ENDPOINT',
     },
     serviceName: {
       doc: 'Name of VCAP Service for Redis',
