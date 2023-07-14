@@ -28,7 +28,7 @@ describe('TrainingCategoryService', () => {
 
       service.getTrainingCategory(establishmentUid, trainingCategoryId).subscribe();
 
-      const req = http.expectOne(`/api/trainingCategories/${establishmentUid}/${trainingCategoryId}`);
+      const req = http.expectOne(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/trainingCategories/${establishmentUid}/${trainingCategoryId}`);
       expect(req.request.method).toBe('GET');
     });
 
@@ -45,7 +45,7 @@ describe('TrainingCategoryService', () => {
       service.getTrainingCategory(establishmentUid, trainingCategoryId, queryParams).subscribe();
 
       const req = http.expectOne(
-        `/api/trainingCategories/${establishmentUid}/${trainingCategoryId}?sortBy=staffNameAsc&searchTerm=&pageIndex=1&itemsPerPage=15`,
+        `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/trainingCategories/${establishmentUid}/${trainingCategoryId}?sortBy=staffNameAsc&searchTerm=&pageIndex=1&itemsPerPage=15`,
       );
       expect(req.request.method).toBe('GET');
     });

@@ -29,7 +29,7 @@ describe('AdminUsersService', () => {
     it('should call the endpoint for getting admin uses', () => {
       service.getAdminUsers().subscribe();
 
-      const req = http.expectOne('/api/user/admin');
+      const req = http.expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/admin');
       expect(req.request.method).toBe('GET');
     });
   });
@@ -45,7 +45,7 @@ describe('AdminUsersService', () => {
       };
       service.createAdminUser(newAdminUser).subscribe();
 
-      const req = http.expectOne('/api/user/add/admin');
+      const req = http.expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/add/admin');
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual(newAdminUser);
     });
@@ -55,7 +55,7 @@ describe('AdminUsersService', () => {
     it('should call the endpoint for retrieving a single admin user', () => {
       service.getAdminUser('mock-useruid').subscribe();
 
-      const req = http.expectOne('/api/user/admin/mock-useruid');
+      const req = http.expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/admin/mock-useruid');
       expect(req.request.method).toBe('GET');
     });
   });
@@ -72,7 +72,7 @@ describe('AdminUsersService', () => {
       const userId = 'mock-userId';
       service.updateAdminUserDetails(userId, updatedAdminUser).subscribe();
 
-      const req = http.expectOne(`/api/user/admin/${userId}`);
+      const req = http.expectOne(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/admin/${userId}`);
       expect(req.request.method).toBe('PUT');
       expect(req.request.body).toEqual(updatedAdminUser);
     });
@@ -82,7 +82,7 @@ describe('AdminUsersService', () => {
     it('should call the delete admin user details endpoint', () => {
       service.deleteAdminUserDetails('mock-userId').subscribe();
 
-      const req = http.expectOne('/api/user/admin/mock-userId');
+      const req = http.expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/admin/mock-userId');
       expect(req.request.method).toBe('DELETE');
     });
   });

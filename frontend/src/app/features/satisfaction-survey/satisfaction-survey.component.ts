@@ -54,7 +54,7 @@ export class SatisfactionSurveyComponent implements AfterViewInit {
 
     const survey = this.buildSatisfactionSurveyBody(this.form.value);
 
-    this.http.post('/api/satisfactionSurvey', survey).subscribe(
+    this.http.post('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/satisfactionSurvey', survey).subscribe(
       () => this.navigateToLogin(),
       (err) => this.navigateToLogin(),
     );

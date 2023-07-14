@@ -35,7 +35,7 @@ describe('UserService', () => {
       const userId = 'mock-userId';
       service.updateAdminUserDetails(userId, updatedAdminUser).subscribe();
 
-      const req = http.expectOne(`/api/user/admin/me/${userId}`);
+      const req = http.expectOne(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/admin/me/${userId}`);
       expect(req.request.method).toBe('PUT');
       expect(req.request.body).toEqual(updatedAdminUser);
     });

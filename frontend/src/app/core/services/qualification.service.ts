@@ -11,6 +11,6 @@ export class QualificationService {
   constructor(private http: HttpClient) {}
 
   getQualifications(): Observable<QualificationLevel[]> {
-    return this.http.get<any>('/api/qualification').pipe(map((res) => res.qualifications));
+    return this.http.get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/qualification').pipe(map((res) => res.qualifications));
   }
 }

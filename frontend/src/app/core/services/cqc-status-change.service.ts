@@ -13,24 +13,31 @@ export class CqcStatusChangeService {
   constructor(private http: HttpClient) {}
 
   public getCqcStatusChanges(): Observable<CqcStatusChanges[]> {
-    return this.http.get<CqcStatusChanges[]>('/api/admin/cqc-status-change/');
+    return this.http.get<CqcStatusChanges[]>(
+      'https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/cqc-status-change/',
+    );
   }
 
   public CqcStatusChangeApproval(data: object) {
-    return this.http.post<any>('/api/admin/cqc-status-change/', data);
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/cqc-status-change/', data);
   }
 
   public getIndividualCqcStatusChange(establishmentUid: string): Observable<CqcStatusChange> {
-    return this.http.get<CqcStatusChange>(`/api/admin/cqc-status-change/${establishmentUid}`);
+    return this.http.get<CqcStatusChange>(
+      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/cqc-status-change/${establishmentUid}`,
+    );
   }
 
   public updateApprovalStatus(data): Observable<any> {
-    return this.http.post<any>(`/api/admin/cqc-status-change/updateStatus`, data);
+    return this.http.post<any>(
+      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/cqc-status-change/updateStatus`,
+      data,
+    );
   }
 
   public getCqcRequestByEstablishmentId(establishmentId: number): Observable<ApprovalRequest<CqcChangeData>> {
     return this.http.get<ApprovalRequest<CqcChangeData>>(
-      `/api/approvals/establishment/${establishmentId}?type=CqcStatusChange&status=Pending`,
+      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/approvals/establishment/${establishmentId}?type=CqcStatusChange&status=Pending`,
     );
   }
 }

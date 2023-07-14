@@ -115,7 +115,7 @@ describe('DragAndDropFilesUploadComponent', () => {
       triggerFileInput();
 
       const establishmentId = TestBed.inject(EstablishmentService).primaryWorkplace.uid;
-      const requests = http.match(`/api/establishment/${establishmentId}/bulkupload/uploadFiles`);
+      const requests = http.match('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/bulkupload/uploadFiles`);
       expect(requests.length).toEqual(1);
     });
   });

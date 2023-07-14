@@ -79,7 +79,7 @@ describe('HowDidYouHearAboutComponent', () => {
       const component = await setup();
       const submit = component.getByRole('button');
       fireEvent.click(submit);
-      const req = TestBed.inject(HttpTestingController).expectOne('/api/registrationSurvey');
+      const req = TestBed.inject(HttpTestingController).expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/registrationSurvey');
       req.flush({});
       expect(req.request.body).toEqual(expectedRequestBody);
     });

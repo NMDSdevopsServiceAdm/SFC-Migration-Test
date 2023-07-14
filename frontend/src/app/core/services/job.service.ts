@@ -11,7 +11,7 @@ export class JobService {
   constructor(private http: HttpClient) {}
 
   public getJobs(): Observable<Job[]> {
-    return this.http.get<GetJobsResponse>('/api/jobs').pipe(map(this.sortJobs));
+    return this.http.get<GetJobsResponse>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/jobs').pipe(map(this.sortJobs));
   }
 
   private sortJobs(response): Job[] {

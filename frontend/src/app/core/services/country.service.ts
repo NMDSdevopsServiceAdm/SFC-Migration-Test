@@ -10,7 +10,7 @@ export class CountryService {
   constructor(private http: HttpClient) {}
 
   getCountries(): Observable<CountryResponse[]> {
-    return this.http.get<any>('/api/country').pipe(map(res => res.countries));
+    return this.http.get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/country').pipe(map(res => res.countries));
   }
 }
 

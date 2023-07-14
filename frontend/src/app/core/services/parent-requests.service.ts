@@ -11,15 +11,15 @@ export class ParentRequestsService {
   constructor(private http: HttpClient) {}
 
   public getParentRequests(): Observable<ParentRequests[]> {
-    return this.http.get<ParentRequests[]>('/api/admin/parent-approval/');
+    return this.http.get<ParentRequests[]>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/parent-approval/');
   }
 
   public getParentRequestByEstablishmentId(establishmentId: number): Observable<boolean> {
-    return this.http.get<boolean>(`/api/approvals/establishment/${establishmentId}?type=BecomeAParent&status=Pending`);
+    return this.http.get<boolean>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/approvals/establishment/${establishmentId}?type=BecomeAParent&status=Pending`);
   }
 
   public getIndividualParentRequest(establishmentUid: string): Observable<any> {
-    return this.http.get<any>(`/api/admin/parent-approval/${establishmentUid}`);
+    return this.http.get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/parent-approval/${establishmentUid}`);
   }
 
   public parentStatusRequested(establishmentId: number): Observable<boolean> {
@@ -27,17 +27,17 @@ export class ParentRequestsService {
   }
 
   public updateApprovalStatus(data: object) {
-    return this.http.post<any>('/api/admin/parent-approval/updateStatus', data);
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/parent-approval/updateStatus', data);
   }
 
   public parentApproval(data: object) {
-    return this.http.post<any>('/api/admin/parent-approval', data);
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/parent-approval', data);
   }
   public becomeParent() {
-    return this.http.post<any>('/api/approvals/become-a-parent/', null);
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/approvals/become-a-parent/', null);
   }
 
   public cancelBecomeAParent() {
-    return this.http.delete<any>('/api/approvals/become-a-parent/');
+    return this.http.delete<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/approvals/become-a-parent/');
   }
 }

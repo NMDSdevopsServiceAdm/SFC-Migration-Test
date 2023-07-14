@@ -8,6 +8,6 @@ export class ServiceUsersService {
   constructor(private http: HttpClient) {}
 
   getServiceUsers() {
-    return this.http.get<any>('/api/serviceUsers');
+    return this.http.get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/serviceUsers');
   }
 }

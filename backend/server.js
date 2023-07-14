@@ -27,6 +27,7 @@ var bodyParser = require('body-parser');
 var proxy = require('express-http-proxy'); // for service public/download content
 var compression = require('compression');
 var toobusy = require('toobusy-js');
+const cors = require('cors');
 
 // app config
 var AppConfig = require('./server/config/appConfig');
@@ -88,6 +89,19 @@ const AWSsns = require('./server/aws/sns');
 AWSsns.initialise(config.get('aws.region'));
 
 var app = express();
+
+// const corsOptions = {
+//   origin: '*',
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   exposedHeaders: ['Authorization', 'authorization'],
+//   allowedHeaders: ['Authorization', 'authorization'],
+//   preflightContinue: true,
+//   optionsSuccessStatus: 204,
+// };
+
+// app.use(cors(corsOptions))
+app.use(cors());
+// app.options('*', cors(corsOptions));
 
 if (config.get('sentry.dsn')) {
   Sentry.init({
@@ -243,7 +257,7 @@ app.use('/api/test', sanitizer()); // used as demonstration on test routes only
  */
 
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
+//app.use(express.static(path.join(__dirname, 'dist')));
 
 // open/reference endpoints
 app.use('/api/services', [refCacheMiddleware.refcache, services]);
@@ -282,15 +296,15 @@ app.use('/api/notification', [cacheMiddleware.nocache, notifications]);
 app.use('/api/admin', [cacheMiddleware.nocache, admin]);
 app.use('/api/approvals', [cacheMiddleware.nocache, approvals]);
 
-app.use('/loaderio-63e80cd3c669177f22e9ec997ea2594d.txt', authLimiter);
-app.get('/loaderio-63e80cd3c669177f22e9ec997ea2594d.txt', function (req, res) {
-  res.sendFile(path.join(__dirname, 'loaderio-63e80cd3c669177f22e9ec997ea2594d.txt'));
-});
+// app.use('/loaderio-63e80cd3c669177f22e9ec997ea2594d.txt', authLimiter);
+// app.get('/loaderio-63e80cd3c669177f22e9ec997ea2594d.txt', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'loaderio-63e80cd3c669177f22e9ec997ea2594d.txt'));
+// });
 
-app.use('*', authLimiter);
-app.get('*', function (req, res) {
-  return res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
+// app.use('*', authLimiter);
+// app.get('*', function (req, res) {
+//   return res.sendFile(path.join(__dirname, 'dist/index.html'));
+// });
 
 app.all('*', function (req, res) {
   res.status(404);

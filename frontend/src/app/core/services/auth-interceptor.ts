@@ -32,6 +32,9 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private getToken(requestUrl: string): string {
+    console.log('******* AUTH INTERCEPTOR : GET TOKEN ********');
+    console.log(requestUrl);
+    console.log(API_PATTERN.test(requestUrl));
     if (requestUrl === ADD_USER_API) {
       return this.createAccountService.token;
     } else if (API_PATTERN.test(requestUrl)) {

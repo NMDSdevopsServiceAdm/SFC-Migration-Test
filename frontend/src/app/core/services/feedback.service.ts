@@ -13,7 +13,7 @@ export class FeedbackService {
   constructor(private http: HttpClient) {}
 
   post(feedback: FeedbackModel) {
-    return this.http.post<any>('/api/feedback', feedback);
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/feedback', feedback);
   }
 
   public get returnTo(): URLStructure {

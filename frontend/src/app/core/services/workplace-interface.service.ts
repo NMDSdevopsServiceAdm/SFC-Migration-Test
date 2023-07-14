@@ -40,7 +40,9 @@ export abstract class WorkplaceInterfaceService {
   }
 
   public checkIfEstablishmentExists(locationID: string): Observable<EstablishmentExistsResponse> {
-    return this.http.get<EstablishmentExistsResponse>(`/api/registration/establishmentExistsCheck/${locationID}`);
+    return this.http.get<EstablishmentExistsResponse>(
+      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/registration/establishmentExistsCheck/${locationID}`,
+    );
   }
 
   public resetService(): void {

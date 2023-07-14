@@ -44,7 +44,7 @@ export class BenchmarksService {
 
   postBenchmarkTabUsage(establishmentId: number) {
     const viewedTime = new Date();
-    return this.http.post<any>(`/api/establishment/${establishmentId}/benchmarks/usage`, { viewedTime });
+    return this.http.post<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/usage`, { viewedTime });
   }
 
   getTileData(establishmentId: string, tilesNeeded: string[]): Observable<BenchmarksResponse> {
@@ -52,20 +52,20 @@ export class BenchmarksService {
     if (tilesNeeded.length) {
       param = '?tiles=' + tilesNeeded.join(',');
     }
-    return this.http.get<BenchmarksResponse>(`/api/establishment/${establishmentId}/benchmarks/${param}`);
+    return this.http.get<BenchmarksResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/${param}`);
   }
 
   getRankingData(establishmentId: string, metric: string): Observable<CompareGroupsRankingsResponse> {
     return this.http.get<CompareGroupsRankingsResponse>(
-      `/api/establishment/${establishmentId}/benchmarks/rankings/${metric}`,
+      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/rankings/${metric}`,
     );
   }
 
   getPayRankingData(establishmentId: string): Observable<PayRankingsResponse> {
-    return this.http.get<PayRankingsResponse>(`/api/establishment/${establishmentId}/benchmarks/rankings/pay`);
+    return this.http.get<PayRankingsResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/rankings/pay`);
   }
 
   getAllRankingData(establishmentId: string): Observable<AllRankingsResponse> {
-    return this.http.get<AllRankingsResponse>(`/api/establishment/${establishmentId}/benchmarks/rankings`);
+    return this.http.get<AllRankingsResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/rankings`);
   }
 }

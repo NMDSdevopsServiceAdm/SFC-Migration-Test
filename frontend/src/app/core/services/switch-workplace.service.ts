@@ -25,7 +25,8 @@ export class SwitchWorkplaceService {
   public navigateToWorkplace(id, username, nmdsId): void {
     this.getNewEstablishmentId(id, username).subscribe(
       (data) => {
-        this.authService.token = data.headers.get('authorization');
+        // this.authService.token = data.headers.get('authorization');
+        this.authService.token = data.body.authorization;
         this.permissionsService.hasWorkplacePermissions(data.body.establishment.uid).subscribe(() => {
           this.onSwapSuccess(data);
         });
@@ -35,21 +36,29 @@ export class SwitchWorkplaceService {
   }
 
   public getAllNotificationWorkplace(nmdsId, params) {
-    return this.http.get<any>(`/api/user/swap/establishment/notification/${nmdsId}`, params);
+    return this.http.get<any>(
+      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/swap/establishment/notification/${nmdsId}`,
+      params,
+    );
   }
 
   public getNewEstablishmentId(id, username) {
     const data = {
       username: username,
     };
-    return this.http.post<any>('/api/user/swap/establishment/' + id, data, { observe: 'response' });
+    return this.http.post<any>(
+      'https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/swap/establishment/' + id,
+      data,
+      { observe: 'response' },
+    );
   }
 
   private onSwapSuccess(data) {
     if (data.body && data.body.establishment && data.body.establishment.uid) {
       this.authService.isOnAdminScreen = false;
       this.authService.setPreviousToken();
-      this.authService.token = data.headers.get('authorization');
+      // this.authService.token = data.headers.get('authorization');
+      this.authService.token = data.body.authorization;
       const workplaceUid = data.body.establishment.uid;
       this.establishmentService
         .getEstablishment(workplaceUid)

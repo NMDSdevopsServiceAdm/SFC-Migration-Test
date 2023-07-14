@@ -33,7 +33,10 @@ export class CreateAccountService {
     establishmentUid: string,
     requestPayload: CreateAccountRequest,
   ): Observable<CreateAccountResponse> {
-    return this.http.post<CreateAccountResponse>(`/api/user/add/establishment/${establishmentUid}`, requestPayload);
+    return this.http.post<CreateAccountResponse>(
+      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/add/establishment/${establishmentUid}`,
+      requestPayload,
+    );
   }
 
   public activateAccount(requestPayload: ActivateAccountRequest) {
@@ -43,9 +46,13 @@ export class CreateAccountService {
   public validateAccountActivationToken(
     requestPayload: ValidateAccountActivationTokenRequest,
   ): Observable<HttpResponse<ValidateAccountActivationTokenResponse>> {
-    return this.http.post<ValidateAccountActivationTokenResponse>('/api/user/validateAddUser', requestPayload, {
-      observe: 'response',
-    });
+    return this.http.post<ValidateAccountActivationTokenResponse>(
+      'https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/validateAddUser',
+      requestPayload,
+      {
+        observe: 'response',
+      },
+    );
   }
 
   public setReturnTo(returnTo: URLStructure): void {

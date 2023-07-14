@@ -85,12 +85,12 @@ describe('HeaderComponent', () => {
     const { getByText } = component;
     fireEvent.click(getByText('Sign out'));
     if (callApi) {
-      const req = TestBed.inject(HttpTestingController).expectOne('/api/logout');
+      const req = TestBed.inject(HttpTestingController).expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/logout');
       req.flush({
         showSurvey,
       });
     } else {
-      TestBed.inject(HttpTestingController).expectNone('/api/logout');
+      TestBed.inject(HttpTestingController).expectNone('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/logout');
     }
 
     advance();

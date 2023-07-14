@@ -908,7 +908,7 @@ const swapEstablishment = async (req, res) => {
   return res
     .set({ Authorization: 'Bearer ' + token })
     .status(200)
-    .json(response);
+    .json({ ...response, authorization: `Bearer ${token}` });
 };
 
 router.route('/').get(return200);

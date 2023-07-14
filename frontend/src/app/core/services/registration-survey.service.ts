@@ -35,7 +35,7 @@ export class RegistrationSurveyService {
   }
 
   public submit(data): Observable<any> {
-    return this.http.post<any>('/api/registrationSurvey', data);
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/registrationSurvey', data);
   }
 
   public submitSurvey() {

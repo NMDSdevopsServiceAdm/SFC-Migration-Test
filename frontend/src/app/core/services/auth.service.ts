@@ -42,7 +42,16 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
+// console.log('********* IS AUTHENTICATED *********');
     const authenticated = this.token ? !this.jwt.isTokenExpired(this.token) : false;
+    // let authenticated;
+    // if (this.token) {
+    //   console.log("***** INSIDE IF *****");
+    //   console.log(this.token);
+// authenticated = !this.jwt.isTokenExpired(this.token);
+//     } else {
+//       authenticated = false;
+//     }
     this._isAuthenticated$.next(authenticated);
     return this._isAuthenticated$.value;
   }
@@ -89,24 +98,35 @@ export class AuthService {
 
   public authenticate(username: string, password: string) {
     this.featureFlagsService.configCatClient.forceRefreshAsync();
-    return this.http.post<any>('/api/login/', { username, password }, { observe: 'response' }).pipe(
-      tap(
-        (response) => {
-          this.token = response.headers.get('authorization');
-          Sentry.configureScope((scope) => {
-            scope.setUser({
-              id: response.body.uid,
+    return this.http
+      .post<any>(
+        'https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/login/',
+        { username, password },
+        { observe: 'response' },
+      )
+      .pipe(
+        tap(
+          (response) => {
+            console.log('*******************');
+            console.log(response.body);
+            // console.log(response.headers);
+            // console.log(response.headers.get('authorization'));
+            // this.token = response.headers.get('authorization');
+            this.token = response.body.authorization;
+            Sentry.configureScope((scope) => {
+              scope.setUser({
+                id: response.body.uid,
+              });
             });
-          });
-        },
-        (error) => console.error(error),
-      ),
-    );
+          },
+          (error) => console.error(error),
+        ),
+      );
   }
 
   public refreshToken() {
     return this.http
-      .get<any>(`/api/login/refresh`, { observe: 'response' })
+      .get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/login/refresh`, { observe: 'response' })
       .pipe(tap((response) => (this.token = response.headers.get('authorization'))));
   }
 
@@ -117,7 +137,7 @@ export class AuthService {
   }
 
   public logoutByUser(): void {
-    this.http.post<any>(`/api/logout`, {}).subscribe(
+    this.http.post<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/logout`, {}).subscribe(
       (data) => {
         this.logoutWithSurvey(data.showSurvey);
       },

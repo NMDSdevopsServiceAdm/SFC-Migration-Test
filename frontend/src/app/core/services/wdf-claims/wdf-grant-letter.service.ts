@@ -10,6 +10,6 @@ export class GrantLetterService {
   constructor(private http: HttpClient) {}
 
   public sendEmailGrantLetter(establishmentId: string, grantLetter: string): Observable<GrantLetter> {
-    return this.http.post<GrantLetter>(`/api/establishment/${establishmentId}/wdfClaims/grantLetter`, grantLetter);
+    return this.http.post<GrantLetter>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/wdfClaims/grantLetter`, grantLetter);
   }
 }

@@ -234,9 +234,13 @@ router.post('/', async (req, res) => {
       tribalErr,
       tribalHashValidated,
       async (err, isMatch, rehashTribal) => {
+        console.log('***** COMPARE PASSWORD ******');
+        console.log('isMatch:', isMatch);
+        console.log('err:', err);
         if (isMatch && !err) {
           const loginTokenTTL = config.get('jwt.ttl.login');
-
+          console.log('login token ttl:');
+          console.log(loginTokenTTL);
           const token = generateJWT.loginJWT(
             loginTokenTTL,
             establishmentUser.user.establishment ? establishmentUser.user.establishment.id : null,
@@ -347,10 +351,12 @@ router.post('/', async (req, res) => {
           });
 
           // TODO: ultimately remove "Bearer" from the response; this should be added by client
+          console.log('******************************');
+          console.log(token);
           return res
             .set({ Authorization: 'Bearer ' + token })
             .status(200)
-            .json(response);
+            .json({ ...response, authorization: `Bearer ${token}` });
         } else {
           await models.sequelize.transaction(async (t) => {
             const maxNumberOfFailedAttempts = 10;

@@ -8,27 +8,27 @@ export class EmailCampaignService {
   constructor(private http: HttpClient) {}
 
   getInactiveWorkplaces(): Observable<any> {
-    return this.http.get<any>('/api/admin/email-campaigns/inactive-workplaces');
+    return this.http.get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces');
   }
 
   getInactiveWorkplcesForDeletion(): Observable<any> {
-    return this.http.get<any>('/api/admin/email-campaigns/inactive-workplaces/inactiveWorkplacesForDeletion');
+    return this.http.get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/inactiveWorkplacesForDeletion');
   }
 
   inactiveWorkplcesForDeletion(): Observable<any> {
-    return this.http.post<any>('/api/admin/email-campaigns/inactive-workplaces/inactiveWorkplacesIdsForDeletions', {});
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/inactiveWorkplacesIdsForDeletions', {});
   }
 
   createInactiveWorkplacesCampaign(): Observable<any> {
-    return this.http.post<any>('/api/admin/email-campaigns/inactive-workplaces', {});
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces', {});
   }
 
   getInactiveWorkplacesHistory(): Observable<any> {
-    return this.http.get<any>('/api/admin/email-campaigns/inactive-workplaces/history');
+    return this.http.get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/history');
   }
 
   getInactiveWorkplacesReport(): Observable<any> {
-    return this.http.get<any>('/api/admin/email-campaigns/inactive-workplaces/report', {
+    return this.http.get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/report', {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
@@ -38,24 +38,24 @@ export class EmailCampaignService {
     let params = new HttpParams();
     params = params.set('groupType', groupType);
 
-    return this.http.get<TotalEmailsResponse>('/api/admin/email-campaigns/targeted-emails/total', {
+    return this.http.get<TotalEmailsResponse>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/total', {
       params,
     });
   }
 
   getTargetedTemplates(): Observable<TemplatesResponse> {
-    return this.http.get<TemplatesResponse>('/api/admin/email-campaigns/targeted-emails/templates');
+    return this.http.get<TemplatesResponse>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/templates');
   }
 
   getTargetedTotalValidEmails(fileFormData: FormData): Observable<TotalEmailsResponse> {
-    return this.http.post<TotalEmailsResponse>('/api/admin/email-campaigns/targeted-emails/total', fileFormData, {
+    return this.http.post<TotalEmailsResponse>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/total', fileFormData, {
       headers: { InterceptorSkipHeader: 'true' },
       params: { groupType: 'multipleAccounts' },
     });
   }
 
   getTargetedEmailsReport(fileFormData: FormData): Observable<any> {
-    return this.http.post<any>('/api/admin/email-campaigns/targeted-emails/report', fileFormData, {
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/report', fileFormData, {
       headers: { InterceptorSkipHeader: 'true' },
       observe: 'response',
       responseType: 'blob' as 'json',
@@ -73,7 +73,7 @@ export class EmailCampaignService {
       nmdsIdsFileData.append('jsonPayload', jsonBlob);
     }
 
-    return this.http.post<any>('/api/admin/email-campaigns/targeted-emails', nmdsIdsFileData || payload, {
+    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails', nmdsIdsFileData || payload, {
       headers: nmdsIdsFileData ? { InterceptorSkipHeader: 'true' } : {},
     });
   }

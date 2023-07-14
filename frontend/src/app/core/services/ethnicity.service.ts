@@ -12,6 +12,6 @@ export class EthnicityService {
   constructor(private http: HttpClient) {}
 
   public getEthnicities(): Observable<EthnicityResponse> {
-    return this.http.get<EthnicityFullResponse>('/api/ethnicity').pipe(map((res) => res.ethnicities));
+    return this.http.get<EthnicityFullResponse>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/ethnicity').pipe(map((res) => res.ethnicities));
   }
 }
