@@ -98,9 +98,20 @@ var app = express();
 //   preflightContinue: true,
 //   optionsSuccessStatus: 204,
 // };
+const whitelist = ['http://sfc-migration-test.s3-website-eu-west-1.amazonaws.com'];
+const whitelistAll = true;
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelistAll || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
-// app.use(cors(corsOptions))
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 // app.options('*', cors(corsOptions));
 
 if (config.get('sentry.dsn')) {
@@ -296,12 +307,12 @@ app.use('/api/notification', [cacheMiddleware.nocache, notifications]);
 app.use('/api/admin', [cacheMiddleware.nocache, admin]);
 app.use('/api/approvals', [cacheMiddleware.nocache, approvals]);
 
-// app.use('/loaderio-63e80cd3c669177f22e9ec997ea2594d.txt', authLimiter);
-// app.get('/loaderio-63e80cd3c669177f22e9ec997ea2594d.txt', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'loaderio-63e80cd3c669177f22e9ec997ea2594d.txt'));
-// });
+app.use('/loaderio-63e80cd3c669177f22e9ec997ea2594d.txt', authLimiter);
+app.get('/loaderio-63e80cd3c669177f22e9ec997ea2594d.txt', function (req, res) {
+  res.sendFile(path.join(__dirname, 'loaderio-63e80cd3c669177f22e9ec997ea2594d.txt'));
+});
 
-// app.use('*', authLimiter);
+app.use('*', authLimiter);
 // app.get('*', function (req, res) {
 //   return res.sendFile(path.join(__dirname, 'dist/index.html'));
 // });
