@@ -11,6 +11,11 @@ dist
 /node_modules
 */node_modules
 
+# terraform
+terraform/.terraform
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
 
 frontend/.angular/cache
 
