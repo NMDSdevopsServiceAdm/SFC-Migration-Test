@@ -90,29 +90,14 @@ AWSsns.initialise(config.get('aws.region'));
 
 var app = express();
 
-// const corsOptions = {
-//   origin: '*',
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   exposedHeaders: ['Authorization', 'authorization'],
-//   allowedHeaders: ['Authorization', 'authorization'],
-//   preflightContinue: true,
-//   optionsSuccessStatus: 204,
-// };
-const whitelist = ['http://sfc-migration-test.s3-website-eu-west-1.amazonaws.com'];
-const whitelistAll = true;
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelistAll || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*',
+  methods: 'GET,PUT,PATCH,POST,DELETE',
+  exposedHeaders: 'Authorization,authorization',
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
-// app.use(cors());
-// app.options('*', cors(corsOptions));
 
 if (config.get('sentry.dsn')) {
   Sentry.init({
