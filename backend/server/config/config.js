@@ -268,6 +268,7 @@ const config = convict({
       doc: 'API key for getAddress.io',
       format: 'String',
       default: '',
+      env: 'GET_ADDRESS_API_KEY',
     },
   },
   aws: {
