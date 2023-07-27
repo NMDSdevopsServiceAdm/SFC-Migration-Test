@@ -1,15 +1,3 @@
-# TODO: We need to enable this to save state soon
-# terraform {
-#   backend "s3" {
-#     key = "medium-terraform/prod/terraform.tfstate"
-#     # ...
-#   }
-# }
-
-# ---------------------------------------------
-# Provision S3 bucket with public access
-# ---------------------------------------------
-
 resource "aws_s3_bucket" "sfc_frontend_bucket" {
   bucket = var.frontend_bucket_name
 
@@ -69,23 +57,6 @@ resource "aws_s3_bucket_policy" "sfc_frontend_bucket_policy" {
     ]
   })
 }
-
-# data "aws_iam_policy_document" "sfc_frontend_bucket_policy"{
-#   statement {
-#     sid ="PublicReadGetObject"
-#     effect = "Allow"
-#     principal= "*"
-#     actions = [
-#       "s3:GetObject",
-#     ]
-
-#     resources = ["${aws_s3_bucket.sfc_frontend_bucket.arn}",
-#     ]
-#   }
-# }
-
-
-
 
 resource "aws_s3_bucket_cors_configuration" "sfc_frontend_bucket_cors_configuration" {
   bucket = aws_s3_bucket.sfc_frontend_bucket.id
