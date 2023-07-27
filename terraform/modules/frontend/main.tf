@@ -54,28 +54,37 @@ resource "aws_s3_bucket_website_configuration" "sfc_frontend_bucket_website_conf
 
 resource "aws_s3_bucket_policy" "sfc_frontend_bucket_policy" {
   bucket = aws_s3_bucket.sfc_frontend_bucket.id
-  policy = aws_iam_policy.sfc_frontend_bucket_policy
-}
-
-resource "aws_iam_policy" "sfc_frontend_bucket_policy" {
-  name        = "sfc_frontend_bucket_policy"
-  description = "The bucket policy to allow access to SFC frontend"
-
-  policy = <<EOT
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "PublicReadGetObject",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "s3:GetObject",
-            "Resource": "${aws_s3_bucket.sfc_frontend_bucket.arn}"
-        }
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "PublicReadGetObject"
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:GetObject"
+        Resource = [
+          "${aws_s3_bucket.sfc_frontend_bucket.arn}/*",
+        ]
+      },
     ]
+  })
 }
-EOT
-}
+
+# data "aws_iam_policy_document" "sfc_frontend_bucket_policy"{
+#   statement {
+#     sid ="PublicReadGetObject"
+#     effect = "Allow"
+#     principal= "*"
+#     actions = [
+#       "s3:GetObject",
+#     ]
+
+#     resources = ["${aws_s3_bucket.sfc_frontend_bucket.arn}",
+#     ]
+#   }
+# }
+
+
 
 
 resource "aws_s3_bucket_cors_configuration" "sfc_frontend_bucket_cors_configuration" {
