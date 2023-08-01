@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "sfc_frontend_bucket" {
-  bucket = var.frontend_bucket_name
+  bucket = "sfc-fronend-${var.environment}"
 
   tags = {
     Name = "S3 bucket for frontend"

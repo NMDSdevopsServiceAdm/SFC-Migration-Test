@@ -1,1 +1,1 @@
-frontend_bucket_name = "frontend-test-bucket"
+environment = "nonprod"

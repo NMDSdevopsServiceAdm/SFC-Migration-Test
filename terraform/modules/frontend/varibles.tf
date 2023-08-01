@@ -1,4 +1,4 @@
-variable "frontend_bucket_name" {
-  description = "Name of the bucket for hosting frontend"
+variable "environment" {
+  description = "Name of environment we're deploying to"
   type        = string
 }

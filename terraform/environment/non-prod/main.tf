@@ -5,11 +5,13 @@ provider "aws" {
 module "frontend" {
   source = "../../modules/frontend"
 
-  frontend_bucket_name = var.frontend_bucket_name
+  environment = var.environment
 }
 
 module "backend" {
   source = "../../modules/backend"
+
+  environment = var.environment
 }
 
 # # TODO: We need to enable this to save state soon

@@ -1,9 +1,9 @@
 resource "aws_ecr_repository" "sfc_backend_ecr_repository" {
-  name = "sfc_backend"
+  name = "ecr-sfc-backend-${var.environment}"
 }
 
 resource "aws_db_instance" "sfc_rds_db" {
-  identifier          = "sfc-db"
+  identifier          = "sfc-db-${var.environment}"
   instance_class      = "db.t3.micro"
   allocated_storage   = 20
   engine              = "postgres"
@@ -21,41 +21,41 @@ resource "random_password" "sfc_rds_password" {
 }
 
 resource "aws_ssm_parameter" "database_password" {
-  name        = "/sam/database/password"
+  name        = "/${var.environment}/database/password"
   description = "The password for the database"
   type        = "SecureString"
   value       = aws_db_instance.sfc_rds_db.password
 }
 
 resource "aws_ssm_parameter" "database_port" {
-  name        = "/sam/database/port"
+  name        = "/${var.environment}/database/port"
   description = "The port for the database"
   type        = "String"
   value       = aws_db_instance.sfc_rds_db.port
 }
 
 resource "aws_ssm_parameter" "database_username" {
-  name        = "/sam/database/user"
+  name        = "/${var.environment}/database/user"
   description = "The username for the database"
   type        = "String"
   value       = aws_db_instance.sfc_rds_db.username
 }
 
 resource "aws_ssm_parameter" "database_name" {
-  name        = "/sam/database/name"
+  name        = "/${var.environment}/database/name"
   description = "The name of the database"
   type        = "String"
   value       = aws_db_instance.sfc_rds_db.db_name
 }
 resource "aws_ssm_parameter" "database_host" {
-  name        = "/sam/database/host"
+  name        = "/${var.environment}/database/host"
   description = "The database host connection string"
   type        = "String"
   value       = aws_db_instance.sfc_rds_db.address
 }
 
 resource "aws_elasticache_cluster" "sfc_redis" {
-  cluster_id           = "sfc-redis"
+  cluster_id           = "sfc-redis-${var.environment}"
   engine               = "redis"
   node_type            = "cache.t4g.micro"
   num_cache_nodes      = 1
@@ -64,7 +64,7 @@ resource "aws_elasticache_cluster" "sfc_redis" {
 }
 
 resource "aws_ssm_parameter" "redis_endpoint" {
-  name        = "/sam/redis/endpoint"
+  name        = "/${var.environment}/redis/endpoint"
   description = "The endpoint for Elasticache"
   type        = "String"
   value       = "redis://THISNEEDSUPDATING:6379" #TODO: Find a way to populate this from Teraform
@@ -116,7 +116,7 @@ resource "aws_iam_role_policy_attachment" "app_runner_erc_access_role_policy_att
 }
 
 resource "aws_apprunner_service" "sfc_app_runner" {
-  service_name = "sfc-app-runner"
+  service_name = "sfc-app-runner-${var.environment}"
 
 
 
