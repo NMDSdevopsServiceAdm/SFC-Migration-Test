@@ -133,7 +133,7 @@ resource "aws_apprunner_service" "sfc_app_runner" {
       image_identifier      = "${aws_ecr_repository.sfc_backend_ecr_repository.repository_url}:latest"
       image_repository_type = "ECR"
       image_configuration {
-        port = 80
+        port = 3000
         runtime_environment_secrets = {
           DB_PASS        = aws_ssm_parameter.database_password.arn
           DB_PORT        = aws_ssm_parameter.database_port.arn
