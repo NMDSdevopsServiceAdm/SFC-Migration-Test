@@ -4,11 +4,17 @@ phases:
   install:
     commands:
       - echo the install
+    finally:
+      - echo the finally
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
+    finally:
+      - echo Nothing to do in the pre_build phase...
   build:
     commands:
+      - echo Build started on
+    finally:
       - echo Build started on
   post_build:
     commands:
