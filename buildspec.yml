@@ -1,13 +1,21 @@
 version: 0.2
 
+env:
+  parameter-store:
+    NODE_OPTIONS: "--max_old_space_size=8192"
+
 phases:
   install:
     runtime-versions:
       nodejs: 14
 
-  env:
-    parameter-store:
-      NODE_OPTIONS: "--max_old_space_size=8192"
+  pre_build:
+    commands:
+     - export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role --role-arn arn:aws:iam::914197850242:role/CodeBuildServiceRole --role-session-name MySessionName --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" --output text))
+
+  build:
+    commands:
+    # -
 
 # Circleci current process
 # Process for install
