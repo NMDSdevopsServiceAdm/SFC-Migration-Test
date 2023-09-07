@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+
+  env:
+    parameter-store:
+      NODE_OPTIONS: "--max_old_space_size=8192"
+
+  commands:
+  pre_build:
+    commands:
+    # - export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" $(aws sts assume-role --role-arn arn:aws:iam::914197850242:role/CodeBuildServiceRole --role-session-name MySessionName --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" --output text))
+  build:
+    commands:
+    # -
+
+# Circleci current process
+# Process for install
+# Pull in env vars
+# check out code
+# restore cache (this is a cicleci thing to speed things up https://circleci.com/docs/caching/ is there a codebuild equivilent / https://docs.aws.amazon.com/codebuild/latest/userguide/build-caching.html)
+# npm ci (or npm install if we cant restore cache)
+# saving cache (see restore)
+# npm build:<env>
+# Persisting to workspace (https://circleci.com/docs/workspaces/)
+
+# Codebuild new process
+# process for install/build
+# Pull in env vars
+# check out code
+#   - Is this handled by the source step in codepipeline?
+#   - Do we to copy this using git?
+# restore cache (https://docs.aws.amazon.com/codebuild/latest/userguide/build-caching.html)
+# npm ci (or npm install if we cant restore cache)
+# saving cache (see restore)
+# cd backend & npm build:test
+# cd frontend & npm build:test
+# Persisting to cache (codebuild equivilent I think)
