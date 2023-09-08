@@ -15,7 +15,9 @@ phases:
   build:
     commands:
       - cd frontend && npm ci
+      - npm run build:test
       - cd ../backend && npm ci
+
 
 
 # env:
