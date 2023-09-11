@@ -63,12 +63,12 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: !isCI,
     singleRun: isCI,
-    browsers: ['HeadlessChrome'],
-    customLaunchers: {
-      HeadlessChrome: {
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers:{
+      ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
         flags: ['--no-sandbox'],
-      },
+      }
     },
     browserDisconnectTimeout: 10000,
     browserDisconnectTolerance: 3,
@@ -85,3 +85,4 @@ module.exports = function (config) {
     },
   });
 };
+
