@@ -11,4 +11,5 @@ phases:
 
   build:
     commands:
-      - cd frontend && npm run test-headless
+      - cd frontend && npm ci
+      - npm run test-headless
