@@ -4,7 +4,7 @@ env:
   variables:
       JUNIT_REPORT_PATH: ./junit/
       JUNIT_REPORT_NAME: test-results.xml
-      NODE_OPTIONS: "--max_old_space_size=8192"
+
 phases:
   install:
     runtime-versions:
