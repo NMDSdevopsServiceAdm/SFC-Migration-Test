@@ -17,6 +17,7 @@ phases:
     commands:
       - useradd chromesandbox
       - export BUILDDIR=$(pwd)
+      - echo $BUILDDIR
       - su chromesandbox && cd $BUILDDIR
       - cd frontend && npm ci
       - npm run test-headless
