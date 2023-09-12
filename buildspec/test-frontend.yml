@@ -19,7 +19,8 @@ phases:
       - export BUILDDIR=$(pwd)
       - echo $BUILDDIR
       - whoami
-      - su chromesandbox && cd $BUILDDIR
+      - su - chromesandbox
+      - cd $BUILDDIR
       - whoami
       - cd frontend && npm ci
       - npm run test-headless
