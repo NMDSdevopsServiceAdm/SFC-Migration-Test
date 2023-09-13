@@ -11,6 +11,7 @@ phases:
   #     nodejs: 18
   pre_build:
     commands:
+      - whoami
       - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
       - nvm install 16
       - nvm use 16
