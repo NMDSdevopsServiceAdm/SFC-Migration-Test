@@ -12,7 +12,7 @@ phases:
   pre_build:
     run-as: root
     commands:
-      - chown -R codebuild-user:codebuild-user "/root/.npm"
+      - chown -R 1000:1000 "/root/.npm"
   build:
     commands:
       - cd frontend && npm ci
