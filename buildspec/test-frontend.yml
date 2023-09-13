@@ -18,6 +18,8 @@ phases:
       - chown -R codebuild-user:codebuild-user "/root/.npm"
       - chmod --recursive 777 /root/.cache/
       - chown -R codebuild-user:codebuild-user /root/.cache/
+      - chown -R codebuild-user:codebuild-user $CODEBUILD_SRC_DIR
+
   build:
     run-as: codebuild-user
     commands:
