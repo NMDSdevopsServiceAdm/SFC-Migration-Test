@@ -9,7 +9,7 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
- pre_build:
+  pre_build:
     run-as: root
     commands:
       - chown -R codebuild-user:codebuild-user "/root/.npm"
