@@ -19,6 +19,8 @@ phases:
       - chmod --recursive 777 /root/.cache/
       - chown -R codebuild-user:codebuild-user /root/.cache/
       - chown -R codebuild-user:codebuild-user $CODEBUILD_SRC_DIR
+      - echo 'kernel.unprivileged_userns_clone=1' > /etc/sysctl.d/00-local-userns.conf
+      - service procps restart
 
   build:
     run-as: codebuild-user
