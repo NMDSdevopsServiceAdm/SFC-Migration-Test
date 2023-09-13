@@ -13,7 +13,7 @@ phases:
 
   build:
     commands:
-      - chown -R codebuild-user:codebuild-user "/root/.npm"
+      - sudo chown -R codebuild-user:codebuild-user "/root/.npm"
       - cd frontend && npm ci
       - npm run build:test
       - cd ../backend && npm ci
