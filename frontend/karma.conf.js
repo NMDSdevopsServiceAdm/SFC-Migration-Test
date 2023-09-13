@@ -63,11 +63,16 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: !isCI,
     singleRun: isCI,
-    browsers: ['Chrome_without_security'],
+    browsers: ['ChromeHeadless'],
     customLaunchers:{
-      Chrome_without_security: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox'],
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--headless',
+          '--disable-gpu',
+          '--remote-debugging-port=9222',
+          '--no-sandbox',
+        ],
       }
     },
     browserDisconnectTimeout: 10000,
