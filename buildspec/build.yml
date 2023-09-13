@@ -12,7 +12,7 @@ phases:
   pre_build:
     run-as: root
     commands:
-      - chmod +x ~
+      - chmod 777 ~
       - chown -R codebuild-user:codebuild-user "/root/.npm"
   build:
     commands:
