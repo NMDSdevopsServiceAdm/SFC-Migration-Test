@@ -14,7 +14,6 @@ phases:
     commands:
       - chmod +x ~
       - chown -R codebuild-user:codebuild-user "/root/.npm"
-      - mkdir /root/.cache
       - chmod --recursive 777 /root/.cache/
       - chown -R codebuild-user:codebuild-user /root/.cache/
   build:
