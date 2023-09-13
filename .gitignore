@@ -49,8 +49,8 @@ TESTS.xml
 Thumbs.db
 
 # Coverage
-/coverage
-/.nyc_output
+*/coverage
+*/.nyc_output
 */fecoverage
 
 # localhost config variations
