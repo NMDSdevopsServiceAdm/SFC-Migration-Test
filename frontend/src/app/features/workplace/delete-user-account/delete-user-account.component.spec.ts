@@ -79,7 +79,7 @@ describe('DeleteUserAccountComponent', () => {
     component.fixture.detectChanges();
 
     const httpTestingController = TestBed.inject(HttpTestingController);
-    const req = httpTestingController.expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/establishment/${workplaceUid}/${userUid}`);
+    const req = httpTestingController.expectOne(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/establishment/${workplaceUid}/${userUid}`);
     expect(req.request.body).toBeNull();
   });
 

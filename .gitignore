@@ -51,7 +51,7 @@ Thumbs.db
 # Coverage
 /coverage
 /.nyc_output
-/fecoverage
+*/fecoverage
 
 # localhost config variations
 /server/config/localhost.*.yaml
