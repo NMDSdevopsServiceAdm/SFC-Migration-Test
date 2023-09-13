@@ -6,15 +6,14 @@ env:
   variables:
     NODE_OPTIONS: "--max_old_space_size=8192"
 phases:
-  # install:
-  #   runtime-versions:
-  #     nodejs: 18
+  install:
+    runtime-versions:
+      nodejs: 18
   pre_build:
+    run-as: root
     commands:
-      - whoami
-      - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-      - nvm install 16
-      - nvm use 16
+      - chmod +x ~
+      - chown -R codebuild-user:codebuild-user "/root/.npm"
   build:
     commands:
       - cd frontend && npm ci
