@@ -13,8 +13,10 @@ phases:
     run-as: root
     commands:
       - chmod +x ~
-      - chmod --recursive 777 /root
-      - chown -R codebuild-user:codebuild-user "/root/.npm"
+      - chown -R codebuild-user:codebuild-user "/root/.npm"q
+      - mkdir /root/.cache
+      - chmod --recursive 777 /root/.cache/
+      - chown -R codebuild-user:codebuild-user /root/.cache/
   build:
     commands:
       - cd frontend && npm ci
