@@ -1,7 +1,5 @@
 version: 0.2
 
-# run-as: codebuild-user
-
 env:
   variables:
     NODE_OPTIONS: "--max_old_space_size=8192"
@@ -9,13 +7,6 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
-  # pre_build:
-  #   run-as: root
-  #   commands:
-  #     - chmod +x ~
-  #     - chown -R codebuild-user:codebuild-user "/root/.npm"
-  #     - chmod --recursive 777 /root/.cache/
-  #     - chown -R codebuild-user:codebuild-user /root/.cache/
   build:
     commands:
       - cd frontend && npm ci
