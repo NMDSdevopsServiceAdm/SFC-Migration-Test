@@ -4,6 +4,10 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
+    commands:
+      - apt-get install wget
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - sudo dpkg -i google-chrome-stable_current_amd64.deb
   build:
     commands:
       - cd frontend && npm ci
