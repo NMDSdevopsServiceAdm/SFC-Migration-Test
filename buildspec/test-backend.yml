@@ -4,14 +4,13 @@ env:
   variables:
       MOCHA_FILE: ./junit/test-results.xml
       NODE_ENV: example
-  parameter-store:
-    DB_HOST: /ja/db_host
 
 phases:
   install:
     runtime-versions:
       nodejs: 18
   build:
+    on-failure: CONTINUE
     commands:
       - cd backend && npm ci
       - npm run server:lambda:cover:unit:ci
