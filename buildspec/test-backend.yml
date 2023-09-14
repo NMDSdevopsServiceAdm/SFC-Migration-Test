@@ -4,6 +4,8 @@ env:
   variables:
       MOCHA_FILE: ./junit/test-results.xml
       NODE_ENV: example
+  parameter-store:
+    DB_HOST: /ja/db_host
 
 phases:
   install:
