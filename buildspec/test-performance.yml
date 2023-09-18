@@ -12,7 +12,8 @@ phases:
   build:
     commands:
       - cd frontend && npm ci
-      - npm run build
       - npm install -g @lhci/cli@0.12.x
+      - npm run build
+      - which google-chrome-stable
       - export CHROME_PATH=$(which google-chrome-stable) "--no-sandbox"
       - lhci autorun
