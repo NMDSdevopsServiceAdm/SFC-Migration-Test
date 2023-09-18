@@ -12,3 +12,6 @@ phases:
       - cd frontend && npm ci
       - npm run build:test
       - cd ../backend && npm ci
+artifacts:
+  files:
+    - 'frontend/*'
