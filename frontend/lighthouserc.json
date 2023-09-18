@@ -4,8 +4,10 @@
       "target": "temporary-public-storage"
     },
     "collect": {
-      "numberOfRuns": 3
+      "numberOfRuns": 3,
+      "settings": { "chromeFlags": "--no-sandbox" }
     },
+
     "assert": {
       "assertions": {
         "categories:performance": ["error", { "aggregationMethod": "optimistic", "minScore": 0.11 }],
