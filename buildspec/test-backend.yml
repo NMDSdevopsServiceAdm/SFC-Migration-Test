@@ -10,7 +10,7 @@ phases:
     runtime-versions:
       nodejs: 18
   build:
-    on-failure: CONTINUE
     commands:
       - cd backend && npm ci
       - npm run server:lambda:cover:unit:ci
+    on-failure: CONTINUE
