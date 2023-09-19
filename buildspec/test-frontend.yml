@@ -16,4 +16,4 @@ phases:
     commands:
       - cd frontend && npm ci
       - npm run test-headless
-    on-failure: CONTINUE
+    on-failure: ABORT
