@@ -4,7 +4,7 @@ env:
   variables:
     NODE_OPTIONS: "--max_old_space_size=8192"
   parameter-store:
-    environment: "/ja/db_host"
+    environment: "/asc-wds-build/env"
 phases:
   install:
     runtime-versions:
