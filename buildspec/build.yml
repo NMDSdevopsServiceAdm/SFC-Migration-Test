@@ -16,7 +16,7 @@ phases:
       - cd ../backend && npm ci
   post_build:
     commands:
-      - aws s3 rm --recursive "s3://sfc-frontend-${environment}/"
+      - aws s3 rm --recursive "s3://sfc-frontend-$environment/"
 
 artifacts:
   files:
