@@ -3,6 +3,8 @@ version: 0.2
 env:
   variables:
     NODE_OPTIONS: "--max_old_space_size=8192"
+  parameter-store:
+    environment: "/ja/db_host"
 phases:
   install:
     runtime-versions:
@@ -14,7 +16,7 @@ phases:
       - cd ../backend && npm ci
   post_build:
     commands:
-      - aws s3 rm --recursive "s3://sfc-frontend-${var.environment}/"
+      - aws s3 rm --recursive "s3://sfc-frontend-${environment}/"
 
 artifacts:
   files:
