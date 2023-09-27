@@ -16,6 +16,6 @@ phases:
     on-failure: CONTINUE
     commands:
       - cd frontend && npm ci
-      - npm run test-headless
-      - CODEBUILD_BUILD_SUCCEEDING=1
+      - npm run test-headless; EXITCODE=$?
+
 
