@@ -10,7 +10,6 @@ phases:
       - apt-get -y update
       - apt-get -y install google-chrome-stable
   build:
-    on-failure: CONTINUE
     commands:
       - cd frontend && npm ci
       - npm install -g @lhci/cli@0.12.x
