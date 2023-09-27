@@ -17,4 +17,5 @@ phases:
     commands:
       - cd frontend && npm ci
       - npm run test-headless
+      - CODEBUILD_BUILD_SUCCEEDING=1
 
