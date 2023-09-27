@@ -3,8 +3,7 @@ version: 0.2
 env:
   variables:
     NODE_OPTIONS: "--max_old_space_size=8192"
-  parameter-store:
-    environment: "/asc-wds-build/env"
+
 phases:
   install:
     runtime-versions:
@@ -14,9 +13,6 @@ phases:
       - cd frontend && npm ci
       - npm run build:test
       - cd ../backend && npm ci
-  post_build:
-    commands:
-      - aws s3 rm --recursive "s3://sfc-frontend-$environment/"
 
 artifacts:
   files:
