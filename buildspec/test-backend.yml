@@ -12,4 +12,4 @@ phases:
   build:
     commands:
       - cd backend && npm ci
-      # - npm run server:lambda:cover:unit:ci
+      - npm run server:lambda:cover:unit:ci
