@@ -10,7 +10,11 @@ phases:
       nodejs: 18
   build:
     commands:
+      - echo "This is pre run"
       - cd frontend && npm ci
+      - ls -lart frontend/src
+      - echo "this is post run"
+      - ls -lart frontend/src
       - npm run build:test
       - cd ../backend && npm ci
 
