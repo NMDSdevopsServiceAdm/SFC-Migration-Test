@@ -18,7 +18,7 @@ phases:
       - ls -lart src
       - cd ../backend && npm ci
 
-artifacts:
-  files:
-    - '**/*'
-  base-directory: 'frontend/src'
+# artifacts:
+#   files:
+#     - '**/*'
+#   base-directory: 'frontend/src'
