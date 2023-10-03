@@ -11,5 +11,5 @@ phases:
       nodejs: 18
   build:
     commands:
-      - cd backend 
+      - cd backend && npm ci
       - npm run server:lambda:cover:unit:ci; EXITCODE=$?
