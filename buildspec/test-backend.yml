@@ -11,6 +11,5 @@ phases:
       nodejs: 18
   build:
     commands:
-      - echo "skipping for the purpose of testing"
-#      - cd backend && npm ci
-#      - npm run server:lambda:cover:unit:ci; EXITCODE=$?
+      - cd backend && npm ci
+      - npm run server:lambda:cover:unit:ci; EXITCODE=$?

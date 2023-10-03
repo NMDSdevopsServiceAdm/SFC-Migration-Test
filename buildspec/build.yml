@@ -10,15 +10,10 @@ phases:
       nodejs: 18
   build:
     commands:
-      - echo "This is pre run"
-      - ls -lart frontend/src
       - cd frontend && npm ci
       - npm run build:test
-      - echo "this is post run"
-      - ls -lart src
       - cd ../backend && npm ci
 
 artifacts:
   files:
     - '**/*'
-  # base-directory: 'frontend/src'
