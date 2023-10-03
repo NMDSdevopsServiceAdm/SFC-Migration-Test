@@ -14,7 +14,7 @@ phases:
       - ls -lart frontend/src
       - cd frontend && npm ci
       - echo "this is post run"
-      - ls -lart frontend/src
+      - ls -lart src
       - npm run build:test
       - cd ../backend && npm ci
 
