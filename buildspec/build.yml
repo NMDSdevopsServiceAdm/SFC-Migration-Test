@@ -12,7 +12,7 @@ phases:
     commands:
       - cd frontend && npm ci
       - npm run build:test
-      - cd ../backend && npm i
+      - cd ../backend && npm ci
 
 artifacts:
   files:
