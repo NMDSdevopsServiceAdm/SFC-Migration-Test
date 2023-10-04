@@ -12,5 +12,4 @@ phases:
   build:
     commands:
       - cd backend
-      - ls ./
       - npm run server:lambda:cover:unit:ci; EXITCODE=$?
