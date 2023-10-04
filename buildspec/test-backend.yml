@@ -9,7 +9,9 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
+    commands:
+      - apt-get update
   build:
     commands:
-      - cd backend && npm ci
+      - cd backend
       - npm run server:lambda:cover:unit:ci; EXITCODE=$?
