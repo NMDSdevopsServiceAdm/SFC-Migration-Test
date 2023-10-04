@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    manifest: "aws ecr batch-get-image --repository-name sfc-backend-build-images --image-ids imageTag=latest --output text --query 'images[].imageManifest'"
+    manifest: "$(aws ecr batch-get-image --repository-name sfc-backend-build-images --image-ids imageTag=latest --output text --query 'images[].imageManifest')"
 
 phases:
   pre_build:
