@@ -10,5 +10,8 @@ phases:
 
   build:
     commands:
+      - echo Retagging the latest ecr image...
       - aws ecr put-image --repository-name sfc-backend-build-images --image-tag latest-staging --image-manifest "$manifest"
+      - echo copy s3 bucket from bnd to staging...
+      - aws s3 cp s3://sfc-frontend-build-artifacts/31fb474 s3://sfc-frontend-staging/31fb474
 
