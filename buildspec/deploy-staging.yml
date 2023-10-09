@@ -14,6 +14,8 @@ phases:
       - echo Retagging the latest ecr image...
       - aws ecr batch-delete-image --repository-name sfc-backend-build-images --image-ids imageTag=staging
       - aws ecr put-image --repository-name sfc-backend-build-images --image-tag staging --image-manifest "$manifest"
+      - aws app-runner deploy --instance AWS_STAGING_APP_RUNNER_ARN # THIS IS PYUDOCODE
+      - aws apprunner start-deployment --service-arn arn:aws:apprunner:eu-west-1:101248264786:service/sfc-app-runner-staging/9e440da7842b4153bd211b2ca2645353
       - echo Copy s3 bucket from bnd to staging...
       - aws s3 cp --recursive s3://sfc-frontend-build-artifacts/$COMMIT_HASH s3://sfc-frontend-staging/
 
