@@ -100,7 +100,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.post<BulkUploadLock>(
-          `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${this.establishmentService.establishmentId}/bulkupload/${this.endpoint}`,
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${this.establishmentService.establishmentId}/bulkupload/${this.endpoint}`,
           payload,
         ),
       undefined,
@@ -113,7 +113,9 @@ export class BulkUploadService {
   }
 
   public deleteFile(workplaceUid: string, fileName: string): Observable<any> {
-    return this.http.delete(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/delete/${fileName}`);
+    return this.http.delete(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/delete/${fileName}`,
+    );
   }
 
   public getFileType(fileName: string): string {
@@ -123,14 +125,21 @@ export class BulkUploadService {
 
   public preValidateFiles(workplaceUid: string): Observable<ValidatedFile[]> {
     return this.checkLockStatus(
-      () => this.http.put<ValidatedFile[]>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}`, null),
+      () =>
+        this.http.put<ValidatedFile[]>(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}`,
+          null,
+        ),
       undefined,
     );
   }
 
   public getUploadedFiles(workplaceUid: string): Observable<ValidatedFile[]> {
     return this.checkLockStatus(
-      () => this.http.get<UploadedFilesResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}`),
+      () =>
+        this.http.get<UploadedFilesResponse>(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}`,
+        ),
       undefined,
     ).pipe(map((response) => response.files));
   }
@@ -139,7 +148,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.get<UploadedFilesRequestToDownloadResponse>(
-          `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}/${key}`,
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}/${key}`,
         ),
       undefined,
     ).pipe(map((response) => response.file.signedUrl));
@@ -149,7 +158,11 @@ export class BulkUploadService {
     const params = new HttpParams().set('downloadType', type);
 
     return this.checkLockStatus(
-      () => this.http.get<Blob>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}/${key}`, { params }),
+      () =>
+        this.http.get<Blob>(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}/${key}`,
+          { params },
+        ),
       {
         observe: 'response',
         responseType: 'blob' as 'json',
@@ -159,14 +172,21 @@ export class BulkUploadService {
 
   public validateFiles(workplaceUid: string): Observable<ValidatedFilesResponse> {
     return this.checkLockStatus(
-      () => this.http.put<ValidatedFilesResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/validate`, null),
+      () =>
+        this.http.put<ValidatedFilesResponse>(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/validate`,
+          null,
+        ),
       undefined,
     );
   }
 
   public getReport(workplaceUid: string, reportType: ReportTypeRequestItem): Observable<HttpResponse<Blob>> {
     return this.checkLockStatus(
-      () => this.http.get<Blob>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/report/${reportType}`),
+      () =>
+        this.http.get<Blob>(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/report/${reportType}`,
+        ),
       {
         observe: 'response',
         responseType: 'blob' as 'json',
@@ -176,27 +196,38 @@ export class BulkUploadService {
 
   public getBulkUploadStatus(establishmentUid: string): Observable<string> {
     return this.http
-      .get<BulkUploadStatus>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/lockstatus`)
+      .get<BulkUploadStatus>(
+        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/lockstatus`,
+      )
       .pipe(map((status) => status.bulkUploadState));
   }
 
   public getBUReport(workplaceUid: string): Observable<HttpResponse<Blob>> {
-    return this.http.get<Blob>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/errorReport/report`, {
-      observe: 'response',
-      responseType: 'blob' as 'json',
-    });
+    return this.http.get<Blob>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/errorReport/report`,
+      {
+        observe: 'response',
+        responseType: 'blob' as 'json',
+      },
+    );
   }
 
   public getLastBulkUpload(workplaceUid: string): Observable<[lastBulkUploadFile]> {
-    return this.http.get<[lastBulkUploadFile]>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/history`);
+    return this.http.get<[lastBulkUploadFile]>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/history`,
+    );
   }
 
   public getMissingRef(workplaceUid: string): Observable<MissingReferences> {
-    return this.http.get<MissingReferences>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/localIdentifiers/missing`);
+    return this.http.get<MissingReferences>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/localIdentifiers/missing`,
+    );
   }
 
   public isFirstBulkUpload(workplaceUid: string): Observable<isFirstBulkupload> {
-    return this.http.get<isFirstBulkupload>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/localIdentifiers`);
+    return this.http.get<isFirstBulkupload>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/localIdentifiers`,
+    );
   }
 
   public getDataCSV(workplaceUid: string, type: BulkUploadFileType): Observable<any> {
@@ -219,7 +250,10 @@ export class BulkUploadService {
         break;
     }
     return this.checkLockStatus(
-      () => this.http.get<Blob>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/download/${url}`),
+      () =>
+        this.http.get<Blob>(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/download/${url}`,
+        ),
       {
         observe: 'response',
         responseType: 'blob' as 'json',
@@ -228,15 +262,25 @@ export class BulkUploadService {
   }
 
   public complete(workplaceUid: string) {
-    return this.checkLockStatus(() => this.http.post(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/complete`, null), {
-      observe: 'body',
-      responseType: 'json',
-    });
+    return this.checkLockStatus(
+      () =>
+        this.http.post(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/complete`,
+          null,
+        ),
+      {
+        observe: 'body',
+        responseType: 'json',
+      },
+    );
   }
 
   public errorReport(workplaceUid: string): Observable<ErrorReport> {
     return this.checkLockStatus(
-      () => this.http.get<ErrorReport>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/errorReport`),
+      () =>
+        this.http.get<ErrorReport>(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/errorReport`,
+        ),
       {
         observe: 'response',
         responseType: 'json',
@@ -251,11 +295,15 @@ export class BulkUploadService {
   }
 
   public getLockStatus(workplaceUid: string): Observable<BulkUploadStatus> {
-    return this.http.get<BulkUploadStatus>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/lockstatus`);
+    return this.http.get<BulkUploadStatus>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/lockstatus`,
+    );
   }
 
   public unlockBulkUpload(workplaceUid: string): Observable<any> {
-    return this.http.get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/unlock`);
+    return this.http.get<any>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/unlock`,
+    );
   }
 
   public formErrorsMap(): Array<ErrorDetails> {
@@ -334,7 +382,11 @@ export class BulkUploadService {
               .pipe(startWith(0))
               .pipe(
                 concatMap(() =>
-                  from(this.http.get<BulkUploadStatus>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/lockstatus`)),
+                  from(
+                    this.http.get<BulkUploadStatus>(
+                      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/lockstatus`,
+                    ),
+                  ),
                 ),
               ),
           ),
@@ -345,7 +397,7 @@ export class BulkUploadService {
           concatMap(() =>
             from(
               this.http.get<any>(
-                `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/response/${requestId}`,
+                `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/response/${requestId}`,
                 httpOptions,
               ),
             ),

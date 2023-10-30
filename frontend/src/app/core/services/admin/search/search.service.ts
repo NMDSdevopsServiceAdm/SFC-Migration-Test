@@ -18,19 +18,27 @@ export class SearchService {
 
   public searchWorkplaces(data: WorkplaceSearchRequest): Observable<WorkplaceSearchItem[]> {
     return this.http
-      .post<WorkplaceSearchItem[]>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/search/establishments', data, { observe: 'response' })
+      .post<WorkplaceSearchItem[]>(
+        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/search/establishments',
+        data,
+        { observe: 'response' },
+      )
       .pipe(map((response) => response.body));
   }
 
   public searchUsers(data: UserSearchRequest): Observable<UserSearchItem[]> {
     return this.http
-      .post<UserSearchItem[]>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/search/users', data, { observe: 'response' })
+      .post<UserSearchItem[]>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/search/users', data, {
+        observe: 'response',
+      })
       .pipe(map((response) => response.body));
   }
 
   public searchGroups(data: GroupSearchRequest): Observable<Array<WorkplaceSearchItem>> {
     return this.http
-      .post<WorkplaceSearchItem[]>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/search/groups', data, { observe: 'response' })
+      .post<WorkplaceSearchItem[]>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/search/groups', data, {
+        observe: 'response',
+      })
       .pipe(map((response) => response.body));
   }
 }

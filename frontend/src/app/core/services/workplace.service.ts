@@ -27,15 +27,22 @@ export class WorkplaceService extends WorkplaceInterfaceService {
   ];
 
   public getServicesByCategory(isRegulated: boolean): Observable<Array<ServiceGroup>> {
-    return this.http.get<Array<ServiceGroup>>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/services/byCategory?cqc=${isRegulated}`);
+    return this.http.get<Array<ServiceGroup>>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/services/byCategory?cqc=${isRegulated}`,
+    );
   }
 
   public getAllMandatoryTrainings(establishmentId: number): Observable<any> {
-    return this.http.get(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining/all`);
+    return this.http.get(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining/all`,
+    );
   }
 
   public addWorkplace(establishmentuid: string, request: AddWorkplaceRequest): Observable<AddWorkplaceResponse> {
-    return this.http.post<AddWorkplaceResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}`, request);
+    return this.http.post<AddWorkplaceResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}`,
+      request,
+    );
   }
 
   public resetService(): void {

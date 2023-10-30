@@ -37,7 +37,7 @@ export class SwitchWorkplaceService {
 
   public getAllNotificationWorkplace(nmdsId, params) {
     return this.http.get<any>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/swap/establishment/notification/${nmdsId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/swap/establishment/notification/${nmdsId}`,
       params,
     );
   }
@@ -47,7 +47,7 @@ export class SwitchWorkplaceService {
       username: username,
     };
     return this.http.post<any>(
-      'https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/swap/establishment/' + id,
+      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/swap/establishment/' + id,
       data,
       { observe: 'response' },
     );

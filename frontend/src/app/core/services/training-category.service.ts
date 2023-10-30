@@ -13,13 +13,16 @@ export class TrainingCategoryService {
 
   getCategoriesWithTraining(establishmentId): Observable<TrainingRecordCategories[]> {
     return this.http
-      .get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/trainingCategories/${establishmentId}/with-training`)
+      .get<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/trainingCategories/${establishmentId}/with-training`)
       .pipe(map((res) => res.trainingCategories));
   }
 
   getTrainingCategory(establishmentUid: string, trainingCategoryId: number, queryParams?: Params): Observable<any> {
-    return this.http.get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/trainingCategories/${establishmentUid}/${trainingCategoryId}`, {
-      params: queryParams,
-    });
+    return this.http.get<any>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/trainingCategories/${establishmentUid}/${trainingCategoryId}`,
+      {
+        params: queryParams,
+      },
+    );
   }
 }

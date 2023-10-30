@@ -50,7 +50,9 @@ describe('SatisfactionSurveyComponent', () => {
 
       const submit = getByRole('button');
       fireEvent.click(submit);
-      const req = TestBed.inject(HttpTestingController).expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/satisfactionSurvey');
+      const req = TestBed.inject(HttpTestingController).expectOne(
+        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/satisfactionSurvey',
+      );
       req.flush({});
 
       function getElementById(id) {

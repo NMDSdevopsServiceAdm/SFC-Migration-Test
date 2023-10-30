@@ -19,30 +19,40 @@ export class TrainingService {
 
   getCategories(): Observable<TrainingCategory[]> {
     return this.http
-      .get<TrainingCategoryResponse>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/trainingCategories')
+      .get<TrainingCategoryResponse>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/trainingCategories')
       .pipe(map((res) => res.trainingCategories));
   }
 
   getAllTrainingByStatus(workplaceUid: string, status: string, queryParams?: Params): Observable<any> {
-    return this.http.get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/trainingAndQualifications/${status}`, {
-      params: queryParams,
-    });
+    return this.http.get<any>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/trainingAndQualifications/${status}`,
+      {
+        params: queryParams,
+      },
+    );
   }
 
   getMissingMandatoryTraining(workplaceUid: string, queryParams?: Params): Observable<any> {
-    return this.http.get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/trainingAndQualifications/missing-training`, {
-      params: queryParams,
-    });
+    return this.http.get<any>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/trainingAndQualifications/missing-training`,
+      {
+        params: queryParams,
+      },
+    );
   }
 
   getCategoryById(categoryId): Observable<TrainingCategory[]> {
     return this.http
-      .get<TrainingCategoryResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/trainingCategories/${categoryId}`)
+      .get<TrainingCategoryResponse>(
+        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/trainingCategories/${categoryId}`,
+      )
       .pipe(map((res) => res.trainingCategories));
   }
 
   public deleteCategoryById(establishmentId, categoryId) {
-    return this.http.delete(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining/${categoryId}`);
+    return this.http.delete(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining/${categoryId}`,
+    );
   }
 
   public updateSelectedStaff(formValue): void {
@@ -63,11 +73,15 @@ export class TrainingService {
 
   //get all mandatory training
   public getAllMandatoryTrainings(establishmentId): Observable<allMandatoryTrainingCategories> {
-    return this.http.get<allMandatoryTrainingCategories>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining`);
+    return this.http.get<allMandatoryTrainingCategories>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining`,
+    );
   }
 
   public deleteAllMandatoryTraining(establishmentId: number) {
-    return this.http.delete(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining`);
+    return this.http.delete(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining`,
+    );
   }
 
   public get trainingOrQualificationPreviouslySelected(): string {

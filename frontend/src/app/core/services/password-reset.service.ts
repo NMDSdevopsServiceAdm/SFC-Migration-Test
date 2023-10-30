@@ -16,22 +16,34 @@ export class PasswordResetService {
   constructor(private http: HttpClient) {}
 
   requestPasswordReset(usernameOrEmail: string) {
-    return this.http.post<RequestPasswordResetResponse>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/registration/requestPasswordReset', { usernameOrEmail });
+    return this.http.post<RequestPasswordResetResponse>(
+      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/registration/requestPasswordReset',
+      { usernameOrEmail },
+    );
   }
 
   validatePasswordReset(data) {
-    return this.http.post('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/registration/validateResetPassword', { uuid: data }, { observe: 'response' });
+    return this.http.post(
+      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/registration/validateResetPassword',
+      { uuid: data },
+      { observe: 'response' },
+    );
   }
 
   resetPassword(data, token) {
     const newPassword = { password: data };
     const headers = new HttpHeaders({ Authorization: token });
 
-    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/resetPassword', newPassword, { headers, responseType: 'text' as 'json' });
+    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/resetPassword', newPassword, {
+      headers,
+      responseType: 'text' as 'json',
+    });
   }
 
   changePassword(data) {
-    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/changePassword', data, { responseType: 'text' as 'json' });
+    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/changePassword', data, {
+      responseType: 'text' as 'json',
+    });
   }
 
   updateState(data) {

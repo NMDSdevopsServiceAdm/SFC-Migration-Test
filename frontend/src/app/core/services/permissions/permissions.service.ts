@@ -15,7 +15,9 @@ export class PermissionsService {
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
 
   public getPermissions(workplaceUid: string): Observable<PermissionsResponse> {
-    return this.http.get<PermissionsResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/permissions`);
+    return this.http.get<PermissionsResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/permissions`,
+    );
   }
 
   public clearPermissions(): void {

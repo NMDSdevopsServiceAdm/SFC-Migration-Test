@@ -21,12 +21,12 @@ export class RegistrationService extends WorkplaceInterfaceService {
   }
 
   public postRegistration(registrationPayload: RegistrationPayload): Observable<any> {
-    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/registration/', registrationPayload);
+    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/registration/', registrationPayload);
   }
 
   /* TODO: Give proper return */
   public getUsernameDuplicate(id: string): Observable<any> {
-    return this.http.get(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/registration/username/${id}`);
+    return this.http.get(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/registration/username/${id}`);
   }
 
   public resetService(): void {

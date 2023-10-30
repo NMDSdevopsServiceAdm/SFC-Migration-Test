@@ -42,16 +42,16 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-// console.log('********* IS AUTHENTICATED *********');
+    // console.log('********* IS AUTHENTICATED *********');
     const authenticated = this.token ? !this.jwt.isTokenExpired(this.token) : false;
     // let authenticated;
     // if (this.token) {
     //   console.log("***** INSIDE IF *****");
     //   console.log(this.token);
-// authenticated = !this.jwt.isTokenExpired(this.token);
-//     } else {
-//       authenticated = false;
-//     }
+    // authenticated = !this.jwt.isTokenExpired(this.token);
+    //     } else {
+    //       authenticated = false;
+    //     }
     this._isAuthenticated$.next(authenticated);
     return this._isAuthenticated$.value;
   }
@@ -100,7 +100,7 @@ export class AuthService {
     this.featureFlagsService.configCatClient.forceRefreshAsync();
     return this.http
       .post<any>(
-        'https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/login/',
+        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/login/',
         { username, password },
         { observe: 'response' },
       )
@@ -126,7 +126,7 @@ export class AuthService {
 
   public refreshToken() {
     return this.http
-      .get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/login/refresh`, { observe: 'response' })
+      .get<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/login/refresh`, { observe: 'response' })
       .pipe(tap((response) => (this.token = response.headers.get('authorization'))));
   }
 
@@ -137,7 +137,7 @@ export class AuthService {
   }
 
   public logoutByUser(): void {
-    this.http.post<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/logout`, {}).subscribe(
+    this.http.post<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/logout`, {}).subscribe(
       (data) => {
         this.logoutWithSurvey(data.showSurvey);
       },

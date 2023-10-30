@@ -112,7 +112,7 @@ export class WorkerService {
   getWorker(workplaceUid: string, workerId: string, wdf: boolean = false): Observable<Worker> {
     const params = wdf ? new HttpParams().set('wdf', `${wdf}`) : null;
     return this.http.get<Worker>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
       { params },
     );
   }
@@ -120,7 +120,7 @@ export class WorkerService {
   public getAllWorkers(establishmentuid: string, queryParams?: Params): Observable<WorkersResponse> {
     return this.http
       .get<WorkersResponse>(
-        `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}/worker`,
+        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}/worker`,
         { params: queryParams || {} },
       )
       .pipe(map((data) => data));
@@ -129,27 +129,27 @@ export class WorkerService {
   public getTotalStaffRecords(establishmentuid: string): Observable<number> {
     return this.http
       .get<TotalStaffRecordsResponse>(
-        `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}/worker/total`,
+        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}/worker/total`,
       )
       .pipe(map((response) => response.total));
   }
 
   getLeaveReasons() {
     return this.http
-      .get<LeaveReasonsResponse>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/worker/leaveReasons')
+      .get<LeaveReasonsResponse>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/worker/leaveReasons')
       .pipe(map((r) => r.reasons));
   }
 
   createWorker(workplaceUid: string, props) {
     return this.http.post<WorkerEditResponse>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker`,
       props,
     );
   }
 
   updateWorker(workplaceUid: string, workerId: string, props) {
     return this.http.put<WorkerEditResponse>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
       props,
     );
   }
@@ -157,7 +157,7 @@ export class WorkerService {
   deleteWorker(workplaceUid: string, workerId: string, reason?: any) {
     return this.http.request<any>(
       'delete',
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
       {
         ...(reason && {
           body: reason,
@@ -171,7 +171,7 @@ export class WorkerService {
 
     return this.http
       .get<AvailableQualificationsResponse>(
-        `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/available`,
+        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/available`,
         {
           params,
         },
@@ -181,39 +181,39 @@ export class WorkerService {
 
   createQualification(workplaceUid: string, workerId: string, record: QualificationRequest) {
     return this.http.post<QualificationRequest>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification`,
       record,
     );
   }
 
   updateQualification(workplaceUid: string, workerId: string, qualificationId: string, record) {
     return this.http.put(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
       record,
     );
   }
 
   deleteQualification(workplaceUid: string, workerId: string, qualificationId: string) {
     return this.http.delete(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
     );
   }
 
   getQualifications(workplaceUid: string, workerId: string) {
     return this.http.get<QualificationsResponse>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification`,
     );
   }
 
   getQualification(workplaceUid: string, workerId: string, qualificationId: string) {
     return this.http.get<QualificationResponse>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
     );
   }
 
   createMultipleTrainingRecords(workplaceUid: string, workerUids: string[], record: TrainingRecordRequest) {
     return this.http.post<MultipleTrainingResponse>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/multiple-training`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/multiple-training`,
       {
         trainingRecord: record,
         workerUids,
@@ -223,7 +223,7 @@ export class WorkerService {
 
   createTrainingRecord(workplaceUid: string, workerId: string, record: TrainingRecordRequest) {
     return this.http.post<TrainingRecordRequest>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training`,
       record,
     );
   }
@@ -235,20 +235,20 @@ export class WorkerService {
     record: TrainingRecordRequest,
   ) {
     return this.http.put<TrainingRecordRequest>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
       record,
     );
   }
 
   deleteTrainingRecord(workplaceUid: string, workerId: string, trainingRecordId: string) {
     return this.http.delete(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
     );
   }
 
   getTrainingRecords(workplaceUid: string, workerId: string) {
     return this.http.get<TrainingResponse>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training`,
     );
   }
 
@@ -257,13 +257,13 @@ export class WorkerService {
     workerId: string,
   ): Observable<TrainingAndQualificationRecords> {
     return this.http.get<TrainingAndQualificationRecords>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/trainingAndQualifications/getAllTrainingAndQualifications`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/trainingAndQualifications/getAllTrainingAndQualifications`,
     );
   }
 
   getTrainingRecord(workplaceUid: string, workerId: string, trainingRecordId: string) {
     return this.http.get<any>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
     );
   }
 
@@ -282,14 +282,14 @@ export class WorkerService {
     request: LocalIdentifiersRequest,
   ): Observable<LocalIdentifiersResponse> {
     return this.http.put<LocalIdentifiersResponse>(
-      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/worker/localIdentifier`,
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/worker/localIdentifier`,
       request,
     );
   }
 
   public getLongTermAbsenceReasons(): Observable<Array<string>> {
     return this.http
-      .get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/longTermAbsence')
+      .get<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/longTermAbsence')
       .pipe(map((res) => res.reasons));
   }
 }

@@ -8,30 +8,44 @@ export class LocationService {
   constructor(private http: HttpClient) {}
 
   public getLocationByPostCode(id: string): Observable<LocationSearchResponse> {
-    return this.http.get<LocationSearchResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/locations/pc/${id}`);
+    return this.http.get<LocationSearchResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/locations/pc/${id}`,
+    );
   }
 
   public getLocationByLocationId(id: string): Observable<LocationSearchResponse> {
-    return this.http.get<LocationSearchResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/locations/lid/${id}`);
+    return this.http.get<LocationSearchResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/locations/lid/${id}`,
+    );
   }
 
   public getAddressesByPostCode(postcode: string): Observable<LocationSearchResponse> {
-    return this.http.get<LocationSearchResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/postcodes/${postcode}`);
+    return this.http.get<LocationSearchResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/postcodes/${postcode}`,
+    );
   }
 
   public getUnassignedLocationByPostCode(id: string): Observable<LocationSearchResponse> {
-    return this.http.get<LocationSearchResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/locations/pc/matching/${id}`);
+    return this.http.get<LocationSearchResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/locations/pc/matching/${id}`,
+    );
   }
 
   public getUnassignedLocationByLocationId(id: string): Observable<LocationSearchResponse> {
-    return this.http.get<LocationSearchResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/locations/lid/matching/${id}`);
+    return this.http.get<LocationSearchResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/locations/lid/matching/${id}`,
+    );
   }
 
   public getLocationByPostcodeOrLocationID(postcodeOrLocationID: string): Observable<LocationSearchResponse> {
-    return this.http.get<LocationSearchResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/locations/pcorlid/${postcodeOrLocationID}`);
+    return this.http.get<LocationSearchResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/locations/pcorlid/${postcodeOrLocationID}`,
+    );
   }
 
   public getUnassignedLocationByPostcodeOrLocationID(postcodeOrLocationID: string): Observable<LocationSearchResponse> {
-    return this.http.get<LocationSearchResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/locations/pcorlid/matching/${postcodeOrLocationID}`);
+    return this.http.get<LocationSearchResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/locations/pcorlid/matching/${postcodeOrLocationID}`,
+    );
   }
 }

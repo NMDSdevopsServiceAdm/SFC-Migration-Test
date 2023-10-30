@@ -80,12 +80,16 @@ const setup = (payTile, payRanking) => {
 
   const httpTestingController = TestBed.inject(HttpTestingController);
 
-  const req = httpTestingController.expectOne(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/benchmarks/?tiles=${metric}`);
+  const req = httpTestingController.expectOne(
+    `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/benchmarks/?tiles=${metric}`,
+  );
   req.flush({
     careWorkerPay: payTile,
   });
 
-  const req2 = httpTestingController.expectOne(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/benchmarks/rankings/${metric}`);
+  const req2 = httpTestingController.expectOne(
+    `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/benchmarks/rankings/${metric}`,
+  );
   req2.flush(payRanking);
 };
 

@@ -29,7 +29,9 @@ export class NotificationsService {
       queryString = `${queryString}${punctuation}${param}`;
     }
 
-    return this.http.get<NotificationListResponse>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/notification/establishment/${establishmentUid}${queryString}`);
+    return this.http.get<NotificationListResponse>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/establishment/${establishmentUid}${queryString}`,
+    );
   }
 
   set notifications(notifications: Notification[]) {
@@ -41,15 +43,15 @@ export class NotificationsService {
   }
 
   public createNotificationType(typeParams): Observable<NotificationTypes> {
-    return this.http.post<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/notification/type', typeParams);
+    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/type', typeParams);
   }
 
   public getUserNotifications(): Observable<Notification[]> {
-    return this.http.get<Notification[]>('åhttps://yj33f7v4a9.eu-west-1.awsapprunner.com/api/user/my/notifications');
+    return this.http.get<Notification[]>('åhttps://a3akknuhui.eu-west-1.awsapprunner.com/api/user/my/notifications');
   }
 
   public getNotificationDetails(notificationUid): Observable<any> {
-    return this.http.get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/notification/${notificationUid}`);
+    return this.http.get<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/${notificationUid}`);
   }
 
   public sendEstablishmentNotification(establishmentUid, notificationType, notificationContentUid?): Observable<any> {
@@ -68,18 +70,28 @@ export class NotificationsService {
   }
 
   public approveOwnership(ownershipChangeRequestId, data): Observable<NotificationRequest> {
-    return this.http.put<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/ownershipRequest/${ownershipChangeRequestId}`, data);
+    return this.http.put<any>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/ownershipRequest/${ownershipChangeRequestId}`,
+      data,
+    );
   }
 
   public setNotificationViewed(notificationUid: string): Observable<NotificationData> {
-    return this.http.patch<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/notification/${notificationUid}`, { isViewed: true });
+    return this.http.patch<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/${notificationUid}`, {
+      isViewed: true,
+    });
   }
 
   public deleteNotifications(notificationsForDeletion: Array<any>): Observable<any> {
-    return this.http.post<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/notification/deleteNotifications`, { notificationsForDeletion });
+    return this.http.post<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/deleteNotifications`, {
+      notificationsForDeletion,
+    });
   }
 
   public setNotificationRequestLinkToParent(establishmentId, data): Observable<NotificationRequest> {
-    return this.http.put<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/linkToParent/action`, data);
+    return this.http.put<any>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/linkToParent/action`,
+      data,
+    );
   }
 }

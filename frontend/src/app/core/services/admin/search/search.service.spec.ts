@@ -26,7 +26,7 @@ describe('SearchService', () => {
     service.searchWorkplaces({ postcode: 'ab3 4de' }).subscribe();
 
     const http = TestBed.inject(HttpTestingController);
-    const req = http.expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/search/establishments');
+    const req = http.expectOne('https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/search/establishments');
 
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({ postcode: 'ab3 4de' });
@@ -36,7 +36,7 @@ describe('SearchService', () => {
     service.searchUsers({ name: 'Joe Bloggs' }).subscribe();
 
     const http = TestBed.inject(HttpTestingController);
-    const req = http.expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/search/users');
+    const req = http.expectOne('https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/search/users');
 
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({ name: 'Joe Bloggs' });
@@ -46,7 +46,7 @@ describe('SearchService', () => {
     service.searchGroups({ employerType: 'All', parent: true }).subscribe();
 
     const http = TestBed.inject(HttpTestingController);
-    const req = http.expectOne('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/admin/search/groups');
+    const req = http.expectOne('https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/search/groups');
 
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({ employerType: 'All', parent: true });

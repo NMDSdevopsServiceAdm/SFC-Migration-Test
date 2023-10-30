@@ -21,48 +21,57 @@ export class ReportService {
       params = new HttpParams().set('effectiveFrom', updatedEffectiveFrom);
     }
 
-    return this.http.get<WDFReport>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentId}`, {
-      params,
-    });
+    return this.http.get<WDFReport>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentId}`,
+      {
+        params,
+      },
+    );
   }
 
   public getWdfSummaryReport(): Observable<HttpResponse<Blob>> {
-    return this.http.get<Blob>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/wdfSummary`, {
+    return this.http.get<Blob>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdfSummary`, {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
   }
 
   public getDeleteReport(): Observable<HttpResponse<Blob>> {
-    return this.http.get<Blob>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/delete/new`, {
+    return this.http.get<Blob>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/delete/new`, {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
   }
 
   public getRegistrationSurveyReport(): Observable<HttpResponse<Blob>> {
-    return this.http.get<any>('https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/registrationSurvey/new', {
+    return this.http.get<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/registrationSurvey/new', {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
   }
 
   public getTrainingAndQualificationsReport(workplaceUid: string): Observable<HttpResponse<Blob>> {
-    return this.http.get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications/${workplaceUid}/report`, {
-      observe: 'response',
-      responseType: 'blob' as 'json',
-    });
+    return this.http.get<any>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications/${workplaceUid}/report`,
+      {
+        observe: 'response',
+        responseType: 'blob' as 'json',
+      },
+    );
   }
 
   public getParentTrainingAndQualificationsReport(workplaceUid: string): Observable<HttpResponse<Blob>> {
-    return this.http.get<any>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications/parent/${workplaceUid}/report`, {
-      observe: 'response',
-      responseType: 'blob' as 'json',
-    });
+    return this.http.get<any>(
+      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications/parent/${workplaceUid}/report`,
+      {
+        observe: 'response',
+        responseType: 'blob' as 'json',
+      },
+    );
   }
 
   public getSatisfactionSurveyReport(): Observable<HttpResponse<Blob>> {
-    return this.http.get<Blob>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/satisfactionSurvey/new`, {
+    return this.http.get<Blob>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/satisfactionSurvey/new`, {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
@@ -92,7 +101,10 @@ export class ReportService {
 
   public getParentWDFReport(workplaceUid: string): Observable<HttpResponse<Blob>> {
     return this.checkWDFLockStatus(
-      () => this.http.get<Blob>(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${workplaceUid}/parent/report`),
+      () =>
+        this.http.get<Blob>(
+          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${workplaceUid}/parent/report`,
+        ),
       {
         observe: 'response',
         responseType: 'blob' as 'json',
@@ -104,10 +116,10 @@ export class ReportService {
   private checkLockStatus(httpOptions, workplaceUid, report): Observable<any> {
     let requestId;
     const reportData = {
-      training: `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/training/establishment/${workplaceUid}/training`,
-      la: `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/localAuthority/establishment/${workplaceUid}/user`,
-      adminla: 'https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/localauthority/admin',
-      trainingAndQuals: 'https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications',
+      training: `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/training/establishment/${workplaceUid}/training`,
+      la: `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/localAuthority/establishment/${workplaceUid}/user`,
+      adminla: 'https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/localauthority/admin',
+      trainingAndQuals: 'https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications',
     };
     const apiPath = reportData[report];
     // Run function every second until lock aquired
@@ -165,7 +177,7 @@ export class ReportService {
                 concatMap(() =>
                   from(
                     this.http.get<WDFLockStatus>(
-                      `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentUid}/parent/lockstatus`,
+                      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentUid}/parent/lockstatus`,
                     ),
                   ),
                 ),
@@ -178,7 +190,7 @@ export class ReportService {
           concatMap(() =>
             from(
               this.http.get<any>(
-                `https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentUid}/parent/response/${requestId}`,
+                `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentUid}/parent/response/${requestId}`,
                 httpOptions,
               ),
             ),

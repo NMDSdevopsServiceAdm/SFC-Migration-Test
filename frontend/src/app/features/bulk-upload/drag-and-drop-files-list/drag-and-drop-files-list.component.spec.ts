@@ -347,7 +347,9 @@ describe('DragAndDropFilesListComponent', () => {
       component.deleteFile(event, filenameToDelete);
       fixture.detectChanges();
 
-      http.expectOne(`https://yj33f7v4a9.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/bulkupload/delete/${filenameToDelete}`);
+      http.expectOne(
+        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/bulkupload/delete/${filenameToDelete}`,
+      );
     });
 
     it('should should show validation as not complete after deleting a file and clear error message', async () => {
