@@ -10,7 +10,7 @@ phases:
 
   build:
     commands:
-      - COMMIT_HASH=$(aws ecr describe-images --repository-name sfc-backend-build-images --image-ids imageTag=preprod --output text | awk '{print $2}' | grep -Ev 'latest|staging|preprod|prod|benchmark'| tail -n1)
+      - COMMIT_HASH=$(aws ecr describe-images --repository-name sfc-backend-build-images --image-ids imageTag=latest --output text | awk '{print $2}' | grep -Ev 'latest|staging|preprod|prod|benchmark'| tail -n1)
       - echo Retagging the latest ecr image...
       - aws ecr batch-delete-image --repository-name sfc-backend-build-images --image-ids imageTag=staging
       - aws ecr put-image --repository-name sfc-backend-build-images --image-tag staging --image-manifest "$manifest"
