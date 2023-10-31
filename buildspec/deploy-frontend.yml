@@ -4,7 +4,7 @@ phases:
   build:
     commands:
       - COMMIT_HASH=$(cat commit_hash.txt | cut -c 1-7)
-      - cd frontend/dist
+      - cd frontend
       - aws s3 cp --recursive . s3://sfc-frontend-build-artifacts/$COMMIT_HASH
 
 
