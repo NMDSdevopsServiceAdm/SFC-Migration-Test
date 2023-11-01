@@ -96,6 +96,8 @@ const corsOptions = {
   exposedHeaders: 'Authorization,authorization',
   optionsSuccessStatus: 200,
   preflightContinue: true,
+  credentials: true,
+  maxAge:0
 };
 
 app.use(cors(corsOptions));
