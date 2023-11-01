@@ -91,13 +91,10 @@ AWSsns.initialise(config.get('aws.region'));
 var app = express();
 
 const corsOptions = {
-  origin: true,
+  origin: '*',
   methods: 'GET,PUT,PATCH,POST,DELETE',
   exposedHeaders: 'Authorization,authorization',
   optionsSuccessStatus: 200,
-  preflightContinue: true,
-  credentials: true,
-  maxAge:0
 };
 
 app.use(cors(corsOptions));
