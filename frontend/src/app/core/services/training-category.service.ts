@@ -4,7 +4,7 @@ import { Params } from '@angular/router';
 import { TrainingRecordCategories } from '@core/model/training.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,13 +13,13 @@ export class TrainingCategoryService {
 
   getCategoriesWithTraining(establishmentId): Observable<TrainingRecordCategories[]> {
     return this.http
-      .get<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/trainingCategories/${establishmentId}/with-training`)
+      .get<any>(`${environment.appRunnerEndpoint}/api/trainingCategories/${establishmentId}/with-training`)
       .pipe(map((res) => res.trainingCategories));
   }
 
   getTrainingCategory(establishmentUid: string, trainingCategoryId: number, queryParams?: Params): Observable<any> {
     return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/trainingCategories/${establishmentUid}/${trainingCategoryId}`,
+      `${environment.appRunnerEndpoint}/api/trainingCategories/${establishmentUid}/${trainingCategoryId}`,
       {
         params: queryParams,
       },

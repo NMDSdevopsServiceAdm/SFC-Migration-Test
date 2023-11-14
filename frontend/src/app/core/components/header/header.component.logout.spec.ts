@@ -22,6 +22,7 @@ import { SatisfactionSurveyComponent } from '@features/satisfaction-survey/satis
 import { FeatureFlagsService } from '@shared/services/feature-flags.service';
 import { SharedModule } from '@shared/shared.module';
 import { fireEvent, render, RenderResult } from '@testing-library/angular';
+import { environment } from 'src/environments/environment';
 
 async function renderHeaderComponent(isAdmin: boolean) {
   const role = isAdmin ? Roles.Admin : Roles.Edit;
@@ -86,13 +87,13 @@ describe('HeaderComponent', () => {
     fireEvent.click(getByText('Sign out'));
     if (callApi) {
       const req = TestBed.inject(HttpTestingController).expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/logout',
+        `${environment.appRunnerEndpoint}/api/logout`,
       );
       req.flush({
         showSurvey,
       });
     } else {
-      TestBed.inject(HttpTestingController).expectNone('https://a3akknuhui.eu-west-1.awsapprunner.com/api/logout');
+      TestBed.inject(HttpTestingController).expectNone(`${environment.appRunnerEndpoint}/api/logout`);
     }
 
     advance();

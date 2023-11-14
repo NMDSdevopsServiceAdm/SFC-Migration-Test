@@ -6,6 +6,7 @@ import { RegistrationSurveyService } from '@core/services/registration-survey.se
 import { MockRegistrationSurveyService } from '@core/test-utils/MockRegistrationSurveyService';
 import { SharedModule } from '@shared/shared.module';
 import { fireEvent, render } from '@testing-library/angular';
+import { environment } from 'src/environments/environment';
 
 import { RegistrationSurveyModule } from '../registration-survey.module';
 import { ThankYouComponent } from '../thank-you/thank-you.component';
@@ -80,7 +81,7 @@ describe('HowDidYouHearAboutComponent', () => {
       const submit = component.getByRole('button');
       fireEvent.click(submit);
       const req = TestBed.inject(HttpTestingController).expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/registrationSurvey',
+        `${environment.appRunnerEndpoint}/api/registrationSurvey`,
       );
       req.flush({});
       expect(req.request.body).toEqual(expectedRequestBody);

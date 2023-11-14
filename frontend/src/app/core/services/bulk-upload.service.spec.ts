@@ -1,7 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { BulkUploadFileType } from '@core/model/bulk-upload.model';
-
+import { environment } from 'src/environments/environment';
 import { BulkUploadService } from './bulk-upload.service';
 
 describe('BulkUploadService', () => {
@@ -31,7 +31,7 @@ describe('BulkUploadService', () => {
       service.getLockStatus('establishmentId').subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/lockstatus',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/lockstatus`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -42,7 +42,7 @@ describe('BulkUploadService', () => {
       service.unlockBulkUpload('establishmentId').subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/unlock',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/unlock`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -53,7 +53,7 @@ describe('BulkUploadService', () => {
       service.getDataCSV('establishmentId', BulkUploadFileType.Establishment).subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/download/establishments',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/download/establishments`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -62,7 +62,7 @@ describe('BulkUploadService', () => {
       service.getDataCSV('establishmentId', BulkUploadFileType.Worker).subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/download/workers',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/download/workers`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -71,7 +71,7 @@ describe('BulkUploadService', () => {
       service.getDataCSV('establishmentId', BulkUploadFileType.WorkerSanitise).subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/download/workersSanitise',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/download/workersSanitise`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -80,7 +80,7 @@ describe('BulkUploadService', () => {
       service.getDataCSV('establishmentId', BulkUploadFileType.Training).subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/download/training',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/download/training`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -93,7 +93,7 @@ describe('BulkUploadService', () => {
         .subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/uploaded/establishmentID/establishment.csv?downloadType=Workplace',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/uploaded/establishmentID/establishment.csv?downloadType=Workplace`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -104,7 +104,7 @@ describe('BulkUploadService', () => {
         .subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/uploaded/establishmentID/training.csv?downloadType=Training',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/uploaded/establishmentID/training.csv?downloadType=Training`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -115,7 +115,7 @@ describe('BulkUploadService', () => {
         .subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/uploaded/establishmentID/staff.csv?downloadType=Staff',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/uploaded/establishmentID/staff.csv?downloadType=Staff`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -126,7 +126,8 @@ describe('BulkUploadService', () => {
         .subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/establishmentId/bulkupload/uploaded/establishmentID/staff.csv?downloadType=StaffSanitise',
+        `${environment.appRunnerEndpoint}/api/establishment/establishmentId/bulkupload/uploaded/establishmentID/staff.csv?downloadType=StaffSanitise`
+        ,
       );
       expect(req.request.method).toBe('GET');
     });

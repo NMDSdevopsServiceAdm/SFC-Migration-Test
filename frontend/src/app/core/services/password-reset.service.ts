@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface RequestPasswordResetResponse {
   usernameOrEmail: string;
@@ -17,14 +18,14 @@ export class PasswordResetService {
 
   requestPasswordReset(usernameOrEmail: string) {
     return this.http.post<RequestPasswordResetResponse>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/registration/requestPasswordReset',
+      `${environment.appRunnerEndpoint}/api/registration/requestPasswordReset`,
       { usernameOrEmail },
     );
   }
 
   validatePasswordReset(data) {
     return this.http.post(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/registration/validateResetPassword',
+      `${environment.appRunnerEndpoint}/api/registration/validateResetPassword`,
       { uuid: data },
       { observe: 'response' },
     );
@@ -34,14 +35,14 @@ export class PasswordResetService {
     const newPassword = { password: data };
     const headers = new HttpHeaders({ Authorization: token });
 
-    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/resetPassword', newPassword, {
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/user/resetPassword`, newPassword, {
       headers,
       responseType: 'text' as 'json',
     });
   }
 
   changePassword(data) {
-    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/changePassword', data, {
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/user/changePassword`, data, {
       responseType: 'text' as 'json',
     });
   }

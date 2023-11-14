@@ -8,6 +8,7 @@ import {
   NotificationTypes,
 } from '@core/model/notifications.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class NotificationsService {
     }
 
     return this.http.get<NotificationListResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/establishment/${establishmentUid}${queryString}`,
+      `${environment.appRunnerEndpoint}/api/notification/establishment/${establishmentUid}${queryString}`,
     );
   }
 
@@ -43,15 +44,15 @@ export class NotificationsService {
   }
 
   public createNotificationType(typeParams): Observable<NotificationTypes> {
-    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/type', typeParams);
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/notification/type`, typeParams);
   }
 
   public getUserNotifications(): Observable<Notification[]> {
-    return this.http.get<Notification[]>('åhttps://a3akknuhui.eu-west-1.awsapprunner.com/api/user/my/notifications');
+    return this.http.get<Notification[]>(`${environment.appRunnerEndpoint}/api/user/my/notifications`);
   }
 
   public getNotificationDetails(notificationUid): Observable<any> {
-    return this.http.get<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/${notificationUid}`);
+    return this.http.get<any>(`${environment.appRunnerEndpoint}/api/notification/${notificationUid}`);
   }
 
   public sendEstablishmentNotification(establishmentUid, notificationType, notificationContentUid?): Observable<any> {
@@ -71,26 +72,26 @@ export class NotificationsService {
 
   public approveOwnership(ownershipChangeRequestId, data): Observable<NotificationRequest> {
     return this.http.put<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/ownershipRequest/${ownershipChangeRequestId}`,
+      `${environment.appRunnerEndpoint}/api/ownershipRequest/${ownershipChangeRequestId}`,
       data,
     );
   }
 
   public setNotificationViewed(notificationUid: string): Observable<NotificationData> {
-    return this.http.patch<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/${notificationUid}`, {
+    return this.http.patch<any>(`${environment.appRunnerEndpoint}/api/notification/${notificationUid}`, {
       isViewed: true,
     });
   }
 
   public deleteNotifications(notificationsForDeletion: Array<any>): Observable<any> {
-    return this.http.post<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/notification/deleteNotifications`, {
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/notification/deleteNotifications`, {
       notificationsForDeletion,
     });
   }
 
   public setNotificationRequestLinkToParent(establishmentId, data): Observable<NotificationRequest> {
     return this.http.put<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/linkToParent/action`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/linkToParent/action`,
       data,
     );
   }

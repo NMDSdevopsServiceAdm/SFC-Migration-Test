@@ -2,7 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 
 import { WorkplaceInterfaceService } from './workplace-interface.service';
-
+import { environment } from 'src/environments/environment';
 describe('WorkplaceInterfaceService', () => {
   let service: WorkplaceInterfaceService;
   let http: HttpTestingController;
@@ -30,7 +30,7 @@ describe('WorkplaceInterfaceService', () => {
       service.checkIfEstablishmentExists('1-1234567890').subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/registration/establishmentExistsCheck/1-1234567890',
+        `${environment.appRunnerEndpoint}/api/registration/establishmentExistsCheck/1-1234567890`,
       );
       expect(req.request.method).toBe('GET');
     });

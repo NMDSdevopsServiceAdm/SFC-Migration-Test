@@ -13,6 +13,7 @@ import { SecurityDetails } from '@core/model/security-details.model';
 import { URLStructure } from '@core/model/url.model';
 import { UserDetails } from '@core/model/userDetails.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class CreateAccountService {
     requestPayload: CreateAccountRequest,
   ): Observable<CreateAccountResponse> {
     return this.http.post<CreateAccountResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/add/establishment/${establishmentUid}`,
+      `${environment.appRunnerEndpoint}/api/user/add/establishment/${establishmentUid}`,
       requestPayload,
     );
   }
@@ -47,7 +48,7 @@ export class CreateAccountService {
     requestPayload: ValidateAccountActivationTokenRequest,
   ): Observable<HttpResponse<ValidateAccountActivationTokenResponse>> {
     return this.http.post<ValidateAccountActivationTokenResponse>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/validateAddUser',
+      `${environment.appRunnerEndpoint}/api/user/validateAddUser`,
       requestPayload,
       {
         observe: 'response',

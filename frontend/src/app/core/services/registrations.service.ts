@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import {
   Note,
   Registration,
@@ -16,49 +17,41 @@ export class RegistrationsService {
   constructor(private http: HttpClient) {}
 
   public getRegistrations(status: string): Observable<Registrations[]> {
-    return this.http.get<Registrations[]>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/registrations/${status}`,
-    );
+    return this.http.get<Registrations[]>(`${environment.appRunnerEndpoint}/api/admin/registrations/${status}`);
   }
 
   public getSingleRegistration(establishmentUid: string): Observable<Registration> {
     return this.http.get<Registration>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/registrations/status/${establishmentUid}`,
+      `${environment.appRunnerEndpoint}/api/admin/registrations/status/${establishmentUid}`,
     );
   }
 
   public updateWorkplaceId(data: UpdateWorkplaceIdRequest): Observable<any> {
-    return this.http.post<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/registrations/updateWorkplaceId`,
-      data,
-    );
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/admin/registrations/updateWorkplaceId`, data);
   }
 
   public updateRegistrationStatus(data: UpdateRegistrationStatusRequest): Observable<any> {
     return this.http.post<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/registrations/updateRegistrationStatus`,
+      `${environment.appRunnerEndpoint}/api/admin/registrations/updateRegistrationStatus`,
       data,
     );
   }
 
   public registrationApproval(data: object) {
-    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/approval/', data);
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/admin/approval/`, data);
   }
 
   public unlockAccount(data: object) {
-    return this.http.post<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/unlock-account/', data);
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/admin/unlock-account/`, data);
   }
 
   public addRegistrationNote(data: object): Observable<any> {
-    return this.http.post<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/registrations/addRegistrationNote',
-      data,
-    );
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/admin/registrations/addRegistrationNote`, data);
   }
 
   public getRegistrationNotes(establishmentUid: string): Observable<Note[]> {
     return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/registrations/getRegistrationNotes/${establishmentUid}`,
+      `${environment.appRunnerEndpoint}/api/admin/registrations/getRegistrationNotes/${establishmentUid}`,
     );
   }
 }

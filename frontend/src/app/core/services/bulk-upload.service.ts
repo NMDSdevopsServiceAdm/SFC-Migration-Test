@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 import {
   BulkUploadFileType,
   BulkUploadLock,
@@ -100,7 +101,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.post<BulkUploadLock>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${this.establishmentService.establishmentId}/bulkupload/${this.endpoint}`,
+          `${environment.appRunnerEndpoint}/api/establishment/${this.establishmentService.establishmentId}/bulkupload/${this.endpoint}`,
           payload,
         ),
       undefined,
@@ -114,7 +115,7 @@ export class BulkUploadService {
 
   public deleteFile(workplaceUid: string, fileName: string): Observable<any> {
     return this.http.delete(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/delete/${fileName}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/delete/${fileName}`,
     );
   }
 
@@ -127,7 +128,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.put<ValidatedFile[]>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}`,
+          `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}`,
           null,
         ),
       undefined,
@@ -138,7 +139,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.get<UploadedFilesResponse>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}`,
+          `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}`,
         ),
       undefined,
     ).pipe(map((response) => response.files));
@@ -148,7 +149,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.get<UploadedFilesRequestToDownloadResponse>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}/${key}`,
+          `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}/${key}`,
         ),
       undefined,
     ).pipe(map((response) => response.file.signedUrl));
@@ -160,7 +161,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.get<Blob>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}/${key}`,
+          `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/${this.endpoint}/${key}`,
           { params },
         ),
       {
@@ -174,7 +175,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.put<ValidatedFilesResponse>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/validate`,
+          `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/validate`,
           null,
         ),
       undefined,
@@ -185,7 +186,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.get<Blob>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/report/${reportType}`,
+          `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/report/${reportType}`,
         ),
       {
         observe: 'response',
@@ -197,14 +198,14 @@ export class BulkUploadService {
   public getBulkUploadStatus(establishmentUid: string): Observable<string> {
     return this.http
       .get<BulkUploadStatus>(
-        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/lockstatus`,
+        `${environment.appRunnerEndpoint}/api/establishment/${establishmentUid}/bulkupload/lockstatus`,
       )
       .pipe(map((status) => status.bulkUploadState));
   }
 
   public getBUReport(workplaceUid: string): Observable<HttpResponse<Blob>> {
     return this.http.get<Blob>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/errorReport/report`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/errorReport/report`,
       {
         observe: 'response',
         responseType: 'blob' as 'json',
@@ -214,19 +215,19 @@ export class BulkUploadService {
 
   public getLastBulkUpload(workplaceUid: string): Observable<[lastBulkUploadFile]> {
     return this.http.get<[lastBulkUploadFile]>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/history`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/history`,
     );
   }
 
   public getMissingRef(workplaceUid: string): Observable<MissingReferences> {
     return this.http.get<MissingReferences>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/localIdentifiers/missing`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/localIdentifiers/missing`,
     );
   }
 
   public isFirstBulkUpload(workplaceUid: string): Observable<isFirstBulkupload> {
     return this.http.get<isFirstBulkupload>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/localIdentifiers`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/localIdentifiers`,
     );
   }
 
@@ -252,7 +253,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.get<Blob>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/download/${url}`,
+          `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/download/${url}`,
         ),
       {
         observe: 'response',
@@ -264,10 +265,7 @@ export class BulkUploadService {
   public complete(workplaceUid: string) {
     return this.checkLockStatus(
       () =>
-        this.http.post(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/complete`,
-          null,
-        ),
+        this.http.post(`${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/complete`, null),
       {
         observe: 'body',
         responseType: 'json',
@@ -279,7 +277,7 @@ export class BulkUploadService {
     return this.checkLockStatus(
       () =>
         this.http.get<ErrorReport>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/errorReport`,
+          `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/errorReport`,
         ),
       {
         observe: 'response',
@@ -296,14 +294,12 @@ export class BulkUploadService {
 
   public getLockStatus(workplaceUid: string): Observable<BulkUploadStatus> {
     return this.http.get<BulkUploadStatus>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/lockstatus`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/lockstatus`,
     );
   }
 
   public unlockBulkUpload(workplaceUid: string): Observable<any> {
-    return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/bulkupload/unlock`,
-    );
+    return this.http.get<any>(`${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/bulkupload/unlock`);
   }
 
   public formErrorsMap(): Array<ErrorDetails> {
@@ -384,7 +380,7 @@ export class BulkUploadService {
                 concatMap(() =>
                   from(
                     this.http.get<BulkUploadStatus>(
-                      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/lockstatus`,
+                      `${environment.appRunnerEndpoint}/api/establishment/${establishmentUid}/bulkupload/lockstatus`,
                     ),
                   ),
                 ),
@@ -397,7 +393,7 @@ export class BulkUploadService {
           concatMap(() =>
             from(
               this.http.get<any>(
-                `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/bulkupload/response/${requestId}`,
+                `${environment.appRunnerEndpoint}/api/establishment/${establishmentUid}/bulkupload/response/${requestId}`,
                 httpOptions,
               ),
             ),

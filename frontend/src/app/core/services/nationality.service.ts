@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Nationality, NationalityResponse } from '@core/model/nationality.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class NationalityService {
 
   getNationalities(): Observable<Nationality[]> {
     return this.http
-      .get<NationalityResponse>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/nationality')
+      .get<NationalityResponse>(`${environment.appRunnerEndpoint}/api/nationality`)
       .pipe(map((res) => res.nationalities));
   }
 }

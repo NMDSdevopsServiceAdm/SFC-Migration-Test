@@ -5,6 +5,7 @@ import { Permissions, PermissionsResponse, PermissionType } from '@core/model/pe
 import { UserService } from '@core/services/user.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class PermissionsService {
 
   public getPermissions(workplaceUid: string): Observable<PermissionsResponse> {
     return this.http.get<PermissionsResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/permissions`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/permissions`,
     );
   }
 

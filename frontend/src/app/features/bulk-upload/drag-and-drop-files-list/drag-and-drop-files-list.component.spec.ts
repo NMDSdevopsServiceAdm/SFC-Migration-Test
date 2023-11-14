@@ -24,7 +24,7 @@ import { fireEvent, render } from '@testing-library/angular';
 import { of } from 'rxjs';
 
 import { DragAndDropFilesListComponent } from './drag-and-drop-files-list.component';
-
+import { environment } from 'src/environments/environment';
 describe('DragAndDropFilesListComponent', () => {
   const setup = async () => {
     const { fixture, getByTestId, getByText } = await render(DragAndDropFilesListComponent, {
@@ -348,7 +348,7 @@ describe('DragAndDropFilesListComponent', () => {
       fixture.detectChanges();
 
       http.expectOne(
-        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/bulkupload/delete/${filenameToDelete}`,
+        `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/bulkupload/delete/${filenameToDelete}`,
       );
     });
 

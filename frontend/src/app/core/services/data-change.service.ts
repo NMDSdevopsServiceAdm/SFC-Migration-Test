@@ -23,14 +23,14 @@ export class DataChangeService {
 
   public updateBUDataChangeLastUpdated(establishmentId: string, lastUpdated: Date): Observable<DataChange> {
     return this.http.post<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/bulkUpload/dataChange`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/bulkUpload/dataChange`,
       { lastUpdated },
     );
   }
 
   public getDataChangesLastUpdate(establishmentId: string): Observable<DataChange> {
     return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/bulkUpload/dataChange`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/bulkUpload/dataChange`,
     );
   }
 }

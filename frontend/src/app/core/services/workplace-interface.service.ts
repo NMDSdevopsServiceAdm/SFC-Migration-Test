@@ -6,7 +6,7 @@ import { EstablishmentExistsResponse } from '@core/model/registration.model';
 import { Service } from '@core/model/services.model';
 import { URLStructure } from '@core/model/url.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -41,7 +41,7 @@ export abstract class WorkplaceInterfaceService {
 
   public checkIfEstablishmentExists(locationID: string): Observable<EstablishmentExistsResponse> {
     return this.http.get<EstablishmentExistsResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/registration/establishmentExistsCheck/${locationID}`,
+      `${environment.appRunnerEndpoint}/api/registration/establishmentExistsCheck/${locationID}`,
     );
   }
 

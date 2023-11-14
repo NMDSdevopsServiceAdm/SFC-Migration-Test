@@ -10,7 +10,7 @@ import { render } from '@testing-library/angular';
 
 import { BulkUploadModule } from '../bulk-upload.module';
 import { DragAndDropFilesUploadComponent } from './drag-and-drop-files-upload.component';
-
+import { environment } from 'src/environments/environment';
 describe('DragAndDropFilesUploadComponent', () => {
   const getDragAndDropFilesUploadComponent = async () => {
     return await render(DragAndDropFilesUploadComponent, {
@@ -116,7 +116,7 @@ describe('DragAndDropFilesUploadComponent', () => {
 
       const establishmentId = TestBed.inject(EstablishmentService).primaryWorkplace.uid;
       const requests = http.match(
-        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/bulkupload/uploadFiles`,
+        `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/bulkupload/uploadFiles`,
       );
       expect(requests.length).toEqual(1);
     });

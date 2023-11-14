@@ -5,7 +5,7 @@ import { WDFReport } from '@core/model/reports.model';
 import { WDFLockStatus } from '@core/model/wdf.model';
 import { from, interval, Observable } from 'rxjs';
 import { concatMap, filter, map, startWith, take } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment';
 import { EstablishmentService } from './establishment.service';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class ReportService {
     }
 
     return this.http.get<WDFReport>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentId}`,
+      `${environment.appRunnerEndpoint}/api/reports/wdf/establishment/${establishmentId}`,
       {
         params,
       },
@@ -30,21 +30,21 @@ export class ReportService {
   }
 
   public getWdfSummaryReport(): Observable<HttpResponse<Blob>> {
-    return this.http.get<Blob>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdfSummary`, {
+    return this.http.get<Blob>(`${environment.appRunnerEndpoint}/api/reports/wdfSummary`, {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
   }
 
   public getDeleteReport(): Observable<HttpResponse<Blob>> {
-    return this.http.get<Blob>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/delete/new`, {
+    return this.http.get<Blob>(`${environment.appRunnerEndpoint}/api/reports/delete/new`, {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
   }
 
   public getRegistrationSurveyReport(): Observable<HttpResponse<Blob>> {
-    return this.http.get<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/registrationSurvey/new', {
+    return this.http.get<any>(`${environment.appRunnerEndpoint}/api/reports/registrationSurvey/new`, {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
@@ -52,7 +52,7 @@ export class ReportService {
 
   public getTrainingAndQualificationsReport(workplaceUid: string): Observable<HttpResponse<Blob>> {
     return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications/${workplaceUid}/report`,
+      `${environment.appRunnerEndpoint}/api/reports/trainingAndQualifications/${workplaceUid}/report`,
       {
         observe: 'response',
         responseType: 'blob' as 'json',
@@ -62,7 +62,7 @@ export class ReportService {
 
   public getParentTrainingAndQualificationsReport(workplaceUid: string): Observable<HttpResponse<Blob>> {
     return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications/parent/${workplaceUid}/report`,
+      `${environment.appRunnerEndpoint}/api/reports/trainingAndQualifications/parent/${workplaceUid}/report`,
       {
         observe: 'response',
         responseType: 'blob' as 'json',
@@ -71,7 +71,7 @@ export class ReportService {
   }
 
   public getSatisfactionSurveyReport(): Observable<HttpResponse<Blob>> {
-    return this.http.get<Blob>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/satisfactionSurvey/new`, {
+    return this.http.get<Blob>(`${environment.appRunnerEndpoint}/api/reports/satisfactionSurvey/new`, {
       observe: 'response',
       responseType: 'blob' as 'json',
     });
@@ -103,7 +103,7 @@ export class ReportService {
     return this.checkWDFLockStatus(
       () =>
         this.http.get<Blob>(
-          `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${workplaceUid}/parent/report`,
+          `${environment.appRunnerEndpoint}/api/reports/wdf/establishment/${workplaceUid}/parent/report`,
         ),
       {
         observe: 'response',
@@ -116,10 +116,10 @@ export class ReportService {
   private checkLockStatus(httpOptions, workplaceUid, report): Observable<any> {
     let requestId;
     const reportData = {
-      training: `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/training/establishment/${workplaceUid}/training`,
-      la: `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/localAuthority/establishment/${workplaceUid}/user`,
-      adminla: 'https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/localauthority/admin',
-      trainingAndQuals: 'https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/trainingAndQualifications',
+      training: `${environment.appRunnerEndpoint}/api/reports/training/establishment/${workplaceUid}/training`,
+      la: `${environment.appRunnerEndpoint}/api/reports/localAuthority/establishment/${workplaceUid}/user`,
+      adminla: `${environment.appRunnerEndpoint}/api/reports/localauthority/admin`,
+      trainingAndQuals: `${environment.appRunnerEndpoint}/api/reports/trainingAndQualifications`,
     };
     const apiPath = reportData[report];
     // Run function every second until lock aquired
@@ -177,7 +177,7 @@ export class ReportService {
                 concatMap(() =>
                   from(
                     this.http.get<WDFLockStatus>(
-                      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentUid}/parent/lockstatus`,
+                      `${environment.appRunnerEndpoint}/api/reports/wdf/establishment/${establishmentUid}/parent/lockstatus`,
                     ),
                   ),
                 ),
@@ -190,7 +190,7 @@ export class ReportService {
           concatMap(() =>
             from(
               this.http.get<any>(
-                `https://a3akknuhui.eu-west-1.awsapprunner.com/api/reports/wdf/establishment/${establishmentUid}/parent/response/${requestId}`,
+                `${environment.appRunnerEndpoint}/api/reports/wdf/establishment/${establishmentUid}/parent/response/${requestId}`,
                 httpOptions,
               ),
             ),

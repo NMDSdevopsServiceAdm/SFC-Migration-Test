@@ -1,6 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-
+import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -35,7 +35,7 @@ describe('UserService', () => {
       const userId = 'mock-userId';
       service.updateAdminUserDetails(userId, updatedAdminUser).subscribe();
 
-      const req = http.expectOne(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/admin/me/${userId}`);
+      const req = http.expectOne(`${environment.appRunnerEndpoint}/api/user/admin/me/${userId}`);
       expect(req.request.method).toBe('PUT');
       expect(req.request.body).toEqual(updatedAdminUser);
     });

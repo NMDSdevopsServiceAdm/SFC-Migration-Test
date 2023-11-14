@@ -9,6 +9,7 @@ import { SharedModule } from '@shared/shared.module';
 import { fireEvent, render } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { SatisfactionSurveyComponent } from './satisfaction-survey.component';
 
@@ -51,7 +52,7 @@ describe('SatisfactionSurveyComponent', () => {
       const submit = getByRole('button');
       fireEvent.click(submit);
       const req = TestBed.inject(HttpTestingController).expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/satisfactionSurvey',
+        `${environment.appRunnerEndpoint}/api/satisfactionSurvey`,
       );
       req.flush({});
 

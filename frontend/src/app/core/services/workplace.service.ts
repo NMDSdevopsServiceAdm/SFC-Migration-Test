@@ -6,7 +6,7 @@ import { LocationAddress } from '@core/model/location.model';
 import { Service, ServiceGroup } from '@core/model/services.model';
 import { AddWorkplaceRequest, AddWorkplaceResponse } from '@core/model/workplace.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 import { WorkplaceInterfaceService } from './workplace-interface.service';
 
 @Injectable({
@@ -28,19 +28,17 @@ export class WorkplaceService extends WorkplaceInterfaceService {
 
   public getServicesByCategory(isRegulated: boolean): Observable<Array<ServiceGroup>> {
     return this.http.get<Array<ServiceGroup>>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/services/byCategory?cqc=${isRegulated}`,
+      `${environment.appRunnerEndpoint}/api/services/byCategory?cqc=${isRegulated}`,
     );
   }
 
   public getAllMandatoryTrainings(establishmentId: number): Observable<any> {
-    return this.http.get(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining/all`,
-    );
+    return this.http.get(`${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/mandatoryTraining/all`);
   }
 
   public addWorkplace(establishmentuid: string, request: AddWorkplaceRequest): Observable<AddWorkplaceResponse> {
     return this.http.post<AddWorkplaceResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentuid}`,
       request,
     );
   }

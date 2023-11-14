@@ -16,6 +16,7 @@ import { URLStructure } from '@core/model/url.model';
 import { Worker, WorkerEditResponse, WorkersResponse } from '@core/model/worker.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface Reason {
   id: number;
@@ -112,44 +113,43 @@ export class WorkerService {
   getWorker(workplaceUid: string, workerId: string, wdf: boolean = false): Observable<Worker> {
     const params = wdf ? new HttpParams().set('wdf', `${wdf}`) : null;
     return this.http.get<Worker>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}`,
       { params },
     );
   }
 
   public getAllWorkers(establishmentuid: string, queryParams?: Params): Observable<WorkersResponse> {
     return this.http
-      .get<WorkersResponse>(
-        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}/worker`,
-        { params: queryParams || {} },
-      )
+      .get<WorkersResponse>(`${environment.appRunnerEndpoint}/api/establishment/${establishmentuid}/worker`, {
+        params: queryParams || {},
+      })
       .pipe(map((data) => data));
   }
 
   public getTotalStaffRecords(establishmentuid: string): Observable<number> {
     return this.http
       .get<TotalStaffRecordsResponse>(
-        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentuid}/worker/total`,
+        `${environment.appRunnerEndpoint}/api/establishment/${establishmentuid}/worker/total`,
       )
       .pipe(map((response) => response.total));
   }
 
   getLeaveReasons() {
     return this.http
-      .get<LeaveReasonsResponse>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/worker/leaveReasons')
+      .get<LeaveReasonsResponse>(`${environment.appRunnerEndpoint}/api/worker/leaveReasons`)
       .pipe(map((r) => r.reasons));
   }
 
   createWorker(workplaceUid: string, props) {
     return this.http.post<WorkerEditResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker`,
       props,
     );
   }
 
   updateWorker(workplaceUid: string, workerId: string, props) {
     return this.http.put<WorkerEditResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}`,
       props,
     );
   }
@@ -157,7 +157,7 @@ export class WorkerService {
   deleteWorker(workplaceUid: string, workerId: string, reason?: any) {
     return this.http.request<any>(
       'delete',
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}`,
       {
         ...(reason && {
           body: reason,
@@ -171,7 +171,7 @@ export class WorkerService {
 
     return this.http
       .get<AvailableQualificationsResponse>(
-        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/available`,
+        `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/qualification/available`,
         {
           params,
         },
@@ -181,39 +181,39 @@ export class WorkerService {
 
   createQualification(workplaceUid: string, workerId: string, record: QualificationRequest) {
     return this.http.post<QualificationRequest>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/qualification`,
       record,
     );
   }
 
   updateQualification(workplaceUid: string, workerId: string, qualificationId: string, record) {
     return this.http.put(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
       record,
     );
   }
 
   deleteQualification(workplaceUid: string, workerId: string, qualificationId: string) {
     return this.http.delete(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
     );
   }
 
   getQualifications(workplaceUid: string, workerId: string) {
     return this.http.get<QualificationsResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/qualification`,
     );
   }
 
   getQualification(workplaceUid: string, workerId: string, qualificationId: string) {
     return this.http.get<QualificationResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/qualification/${qualificationId}`,
     );
   }
 
   createMultipleTrainingRecords(workplaceUid: string, workerUids: string[], record: TrainingRecordRequest) {
     return this.http.post<MultipleTrainingResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/multiple-training`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/multiple-training`,
       {
         trainingRecord: record,
         workerUids,
@@ -223,7 +223,7 @@ export class WorkerService {
 
   createTrainingRecord(workplaceUid: string, workerId: string, record: TrainingRecordRequest) {
     return this.http.post<TrainingRecordRequest>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/training`,
       record,
     );
   }
@@ -235,20 +235,20 @@ export class WorkerService {
     record: TrainingRecordRequest,
   ) {
     return this.http.put<TrainingRecordRequest>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
       record,
     );
   }
 
   deleteTrainingRecord(workplaceUid: string, workerId: string, trainingRecordId: string) {
     return this.http.delete(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
     );
   }
 
   getTrainingRecords(workplaceUid: string, workerId: string) {
     return this.http.get<TrainingResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/training`,
     );
   }
 
@@ -257,13 +257,13 @@ export class WorkerService {
     workerId: string,
   ): Observable<TrainingAndQualificationRecords> {
     return this.http.get<TrainingAndQualificationRecords>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/trainingAndQualifications/getAllTrainingAndQualifications`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/trainingAndQualifications/getAllTrainingAndQualifications`,
     );
   }
 
   getTrainingRecord(workplaceUid: string, workerId: string, trainingRecordId: string) {
     return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/worker/${workerId}/training/${trainingRecordId}`,
     );
   }
 
@@ -282,14 +282,12 @@ export class WorkerService {
     request: LocalIdentifiersRequest,
   ): Observable<LocalIdentifiersResponse> {
     return this.http.put<LocalIdentifiersResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentUid}/worker/localIdentifier`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentUid}/worker/localIdentifier`,
       request,
     );
   }
 
   public getLongTermAbsenceReasons(): Observable<Array<string>> {
-    return this.http
-      .get<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/longTermAbsence')
-      .pipe(map((res) => res.reasons));
+    return this.http.get<any>(`${environment.appRunnerEndpoint}/api/longTermAbsence`).pipe(map((res) => res.reasons));
   }
 }

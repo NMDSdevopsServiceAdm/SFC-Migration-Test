@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { QualificationLevel } from '@core/model/qualification.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class QualificationService {
 
   getQualifications(): Observable<QualificationLevel[]> {
     return this.http
-      .get<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/qualification')
+      .get<any>(`${environment.appRunnerEndpoint}/api/qualification`)
       .pipe(map((res) => res.qualifications));
   }
 }

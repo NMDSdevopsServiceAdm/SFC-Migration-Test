@@ -2,6 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 
 import { EmailCampaignService } from './email-campaign.service';
+import { environment } from 'src/environments/environment';
 
 describe('EmailCampaignService', () => {
   let service: EmailCampaignService;
@@ -26,9 +27,7 @@ describe('EmailCampaignService', () => {
     service.getInactiveWorkplaces().subscribe();
 
     const http = TestBed.inject(HttpTestingController);
-    const req = http.expectOne(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces',
-    );
+    const req = http.expectOne(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces`);
 
     expect(req.request.method).toBe('GET');
   });
@@ -37,9 +36,7 @@ describe('EmailCampaignService', () => {
     service.createInactiveWorkplacesCampaign().subscribe();
 
     const http = TestBed.inject(HttpTestingController);
-    const req = http.expectOne(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces',
-    );
+    const req = http.expectOne(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces`);
 
     expect(req.request.method).toBe('POST');
   });
@@ -49,7 +46,7 @@ describe('EmailCampaignService', () => {
 
     const http = TestBed.inject(HttpTestingController);
     const req = http.expectOne(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/history',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces/history`,
     );
 
     expect(req.request.method).toBe('GET');
@@ -59,9 +56,7 @@ describe('EmailCampaignService', () => {
     service.getInactiveWorkplacesReport().subscribe();
 
     const http = TestBed.inject(HttpTestingController);
-    const req = http.expectOne(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/report',
-    );
+    const req = http.expectOne(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces/report`);
 
     expect(req.request.method).toBe('GET');
   });
@@ -71,7 +66,7 @@ describe('EmailCampaignService', () => {
 
     const http = TestBed.inject(HttpTestingController);
     const req = http.expectOne(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/total?groupType=primaryUsers',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails/total?groupType=primaryUsers`,
     );
 
     expect(req.request.method).toBe('GET');
@@ -81,9 +76,7 @@ describe('EmailCampaignService', () => {
     service.getTargetedTemplates().subscribe();
 
     const http = TestBed.inject(HttpTestingController);
-    const req = http.expectOne(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/templates',
-    );
+    const req = http.expectOne(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails/templates`);
 
     expect(req.request.method).toBe('GET');
   });
@@ -92,9 +85,7 @@ describe('EmailCampaignService', () => {
     service.createTargetedEmailsCampaign('primaryUsers', '1').subscribe();
 
     const http = TestBed.inject(HttpTestingController);
-    const req = http.expectOne(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails',
-    );
+    const req = http.expectOne(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails`);
 
     expect(req.request.method).toBe('POST');
     expect(req.request.body.groupType).toEqual('primaryUsers');
@@ -106,7 +97,7 @@ describe('EmailCampaignService', () => {
 
     const http = TestBed.inject(HttpTestingController);
     const req = http.expectOne(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/total?groupType=multipleAccounts',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails/total?groupType=multipleAccounts`,
     );
 
     expect(req.request.method).toBe('POST');

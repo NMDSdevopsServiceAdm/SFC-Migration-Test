@@ -2,51 +2,42 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TemplatesResponse, TotalEmailsResponse } from '@core/model/emails.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class EmailCampaignService {
   constructor(private http: HttpClient) {}
 
   getInactiveWorkplaces(): Observable<any> {
-    return this.http.get<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces',
-    );
+    return this.http.get<any>(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces`);
   }
 
   getInactiveWorkplcesForDeletion(): Observable<any> {
     return this.http.get<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/inactiveWorkplacesForDeletion',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces/inactiveWorkplacesForDeletion`,
     );
   }
 
   inactiveWorkplcesForDeletion(): Observable<any> {
     return this.http.post<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/inactiveWorkplacesIdsForDeletions',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces/inactiveWorkplacesIdsForDeletions`,
       {},
     );
   }
 
   createInactiveWorkplacesCampaign(): Observable<any> {
-    return this.http.post<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces',
-      {},
-    );
+    return this.http.post<any>(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces`, {});
   }
 
   getInactiveWorkplacesHistory(): Observable<any> {
-    return this.http.get<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/history',
-    );
+    return this.http.get<any>(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces/history`);
   }
 
   getInactiveWorkplacesReport(): Observable<any> {
-    return this.http.get<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/inactive-workplaces/report',
-      {
-        observe: 'response',
-        responseType: 'blob' as 'json',
-      },
-    );
+    return this.http.get<any>(`${environment.appRunnerEndpoint}/api/admin/email-campaigns/inactive-workplaces/report`, {
+      observe: 'response',
+      responseType: 'blob' as 'json',
+    });
   }
 
   getTargetedTotalEmails(groupType: string): Observable<TotalEmailsResponse> {
@@ -54,7 +45,7 @@ export class EmailCampaignService {
     params = params.set('groupType', groupType);
 
     return this.http.get<TotalEmailsResponse>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/total',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails/total`,
       {
         params,
       },
@@ -63,13 +54,13 @@ export class EmailCampaignService {
 
   getTargetedTemplates(): Observable<TemplatesResponse> {
     return this.http.get<TemplatesResponse>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/templates',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails/templates`,
     );
   }
 
   getTargetedTotalValidEmails(fileFormData: FormData): Observable<TotalEmailsResponse> {
     return this.http.post<TotalEmailsResponse>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/total',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails/total`,
       fileFormData,
       {
         headers: { InterceptorSkipHeader: 'true' },
@@ -80,7 +71,7 @@ export class EmailCampaignService {
 
   getTargetedEmailsReport(fileFormData: FormData): Observable<any> {
     return this.http.post<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails/report',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails/report`,
       fileFormData,
       {
         headers: { InterceptorSkipHeader: 'true' },
@@ -102,7 +93,7 @@ export class EmailCampaignService {
     }
 
     return this.http.post<any>(
-      'https://a3akknuhui.eu-west-1.awsapprunner.com/api/admin/email-campaigns/targeted-emails',
+      `${environment.appRunnerEndpoint}/api/admin/email-campaigns/targeted-emails`,
       nmdsIdsFileData || payload,
       {
         headers: nmdsIdsFileData ? { InterceptorSkipHeader: 'true' } : {},

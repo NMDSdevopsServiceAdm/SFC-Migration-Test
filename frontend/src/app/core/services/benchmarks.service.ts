@@ -8,7 +8,7 @@ import {
 } from '@core/model/benchmarks.model';
 import { URLStructure } from '@core/model/url.model';
 import { Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -45,7 +45,7 @@ export class BenchmarksService {
   postBenchmarkTabUsage(establishmentId: number) {
     const viewedTime = new Date();
     return this.http.post<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/usage`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/benchmarks/usage`,
       { viewedTime },
     );
   }
@@ -56,25 +56,25 @@ export class BenchmarksService {
       param = '?tiles=' + tilesNeeded.join(',');
     }
     return this.http.get<BenchmarksResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/${param}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/benchmarks/${param}`,
     );
   }
 
   getRankingData(establishmentId: string, metric: string): Observable<CompareGroupsRankingsResponse> {
     return this.http.get<CompareGroupsRankingsResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/rankings/${metric}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/benchmarks/rankings/${metric}`,
     );
   }
 
   getPayRankingData(establishmentId: string): Observable<PayRankingsResponse> {
     return this.http.get<PayRankingsResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/rankings/pay`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/benchmarks/rankings/pay`,
     );
   }
 
   getAllRankingData(establishmentId: string): Observable<AllRankingsResponse> {
     return this.http.get<AllRankingsResponse>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/benchmarks/rankings`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/benchmarks/rankings`,
     );
   }
 }

@@ -2,7 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 
 import { TrainingService } from './training.service';
-
+import { environment } from 'src/environments/environment';
 describe('TrainingService', () => {
   let service: TrainingService;
   let http: HttpTestingController;
@@ -30,7 +30,7 @@ describe('TrainingService', () => {
       service.getAllTrainingByStatus('mock-uid', 'expired').subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/mock-uid/trainingAndQualifications/expired',
+        `${environment.appRunnerEndpoint}/api/establishment/mock-uid/trainingAndQualifications/expired`,
       );
       expect(req.request.method).toBe('GET');
     });
@@ -41,7 +41,7 @@ describe('TrainingService', () => {
       service.getMissingMandatoryTraining('mock-uid').subscribe();
 
       const req = http.expectOne(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/mock-uid/trainingAndQualifications/missing-training',
+        `${environment.appRunnerEndpoint}/api/establishment/mock-uid/trainingAndQualifications/missing-training`,
       );
       expect(req.request.method).toBe('GET');
     });

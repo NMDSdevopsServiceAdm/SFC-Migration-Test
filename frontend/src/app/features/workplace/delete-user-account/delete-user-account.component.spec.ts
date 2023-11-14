@@ -9,6 +9,7 @@ import { MockUserService } from '@core/test-utils/MockUserService';
 import { SharedModule } from '@shared/shared.module';
 import { fireEvent, render } from '@testing-library/angular';
 import { of, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { DeleteUserAccountComponent } from './delete-user-account.component';
 
@@ -80,7 +81,7 @@ describe('DeleteUserAccountComponent', () => {
 
     const httpTestingController = TestBed.inject(HttpTestingController);
     const req = httpTestingController.expectOne(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/user/establishment/${workplaceUid}/${userUid}`,
+      `${environment.appRunnerEndpoint}/api/user/establishment/${workplaceUid}/${userUid}`,
     );
     expect(req.request.body).toBeNull();
   });

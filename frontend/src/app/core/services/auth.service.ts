@@ -13,6 +13,7 @@ import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { EstablishmentService } from './establishment.service';
 import { PermissionsService } from './permissions/permissions.service';
 import { UserService } from './user.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -99,11 +100,7 @@ export class AuthService {
   public authenticate(username: string, password: string) {
     this.featureFlagsService.configCatClient.forceRefreshAsync();
     return this.http
-      .post<any>(
-        'https://a3akknuhui.eu-west-1.awsapprunner.com/api/login/',
-        { username, password },
-        { observe: 'response' },
-      )
+      .post<any>(`${environment.appRunnerEndpoint}/api/login/`, { username, password }, { observe: 'response' })
       .pipe(
         tap(
           (response) => {
@@ -126,7 +123,7 @@ export class AuthService {
 
   public refreshToken() {
     return this.http
-      .get<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/login/refresh`, { observe: 'response' })
+      .get<any>(`${environment.appRunnerEndpoint}/api/login/refresh`, { observe: 'response' })
       .pipe(tap((response) => (this.token = response.headers.get('authorization'))));
   }
 
@@ -137,7 +134,7 @@ export class AuthService {
   }
 
   public logoutByUser(): void {
-    this.http.post<any>(`https://a3akknuhui.eu-west-1.awsapprunner.com/api/logout`, {}).subscribe(
+    this.http.post<any>(`${environment.appRunnerEndpoint}/api/logout`, {}).subscribe(
       (data) => {
         this.logoutWithSurvey(data.showSurvey);
       },

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface RecruitmentResponse {
   id: number;
@@ -16,7 +17,7 @@ export class RecruitmentService {
 
   getRecruitedFrom(): Observable<RecruitmentResponse[]> {
     return this.http
-      .get<any>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/recruitedFrom')
+      .get<any>(`${environment.appRunnerEndpoint}/api/recruitedFrom`)
       .pipe(map((res) => res.recruitedFrom));
   }
 }

@@ -5,6 +5,7 @@ import { allMandatoryTrainingCategories, TrainingCategory, TrainingCategoryRespo
 import { Worker } from '@core/model/worker.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +20,13 @@ export class TrainingService {
 
   getCategories(): Observable<TrainingCategory[]> {
     return this.http
-      .get<TrainingCategoryResponse>('https://a3akknuhui.eu-west-1.awsapprunner.com/api/trainingCategories')
+      .get<TrainingCategoryResponse>(`${environment.appRunnerEndpoint}/api/trainingCategories`)
       .pipe(map((res) => res.trainingCategories));
   }
 
   getAllTrainingByStatus(workplaceUid: string, status: string, queryParams?: Params): Observable<any> {
     return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/trainingAndQualifications/${status}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/trainingAndQualifications/${status}`,
       {
         params: queryParams,
       },
@@ -34,7 +35,7 @@ export class TrainingService {
 
   getMissingMandatoryTraining(workplaceUid: string, queryParams?: Params): Observable<any> {
     return this.http.get<any>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${workplaceUid}/trainingAndQualifications/missing-training`,
+      `${environment.appRunnerEndpoint}/api/establishment/${workplaceUid}/trainingAndQualifications/missing-training`,
       {
         params: queryParams,
       },
@@ -43,15 +44,13 @@ export class TrainingService {
 
   getCategoryById(categoryId): Observable<TrainingCategory[]> {
     return this.http
-      .get<TrainingCategoryResponse>(
-        `https://a3akknuhui.eu-west-1.awsapprunner.com/api/trainingCategories/${categoryId}`,
-      )
+      .get<TrainingCategoryResponse>(`${environment.appRunnerEndpoint}/api/trainingCategories/${categoryId}`)
       .pipe(map((res) => res.trainingCategories));
   }
 
   public deleteCategoryById(establishmentId, categoryId) {
     return this.http.delete(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining/${categoryId}`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/mandatoryTraining/${categoryId}`,
     );
   }
 
@@ -74,14 +73,12 @@ export class TrainingService {
   //get all mandatory training
   public getAllMandatoryTrainings(establishmentId): Observable<allMandatoryTrainingCategories> {
     return this.http.get<allMandatoryTrainingCategories>(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining`,
+      `${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/mandatoryTraining`,
     );
   }
 
   public deleteAllMandatoryTraining(establishmentId: number) {
-    return this.http.delete(
-      `https://a3akknuhui.eu-west-1.awsapprunner.com/api/establishment/${establishmentId}/mandatoryTraining`,
-    );
+    return this.http.delete(`${environment.appRunnerEndpoint}/api/establishment/${establishmentId}/mandatoryTraining`);
   }
 
   public get trainingOrQualificationPreviouslySelected(): string {
