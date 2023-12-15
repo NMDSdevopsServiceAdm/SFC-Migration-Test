@@ -437,6 +437,11 @@ echo 'Remove node modules from the root directory'
 rm -rf ./node_modules
 rm -rf ./.circleci
 
+echo 'Rename docker folder'
+mv docker testDbSetup
+echo 'Move docker-compose into renamed testDbSetup folder'
+mv docker-compose.yml ./testDbSetup
+
 echo 'Remove manifest files and original package.json files'
 manifestFiles=('manifest.benchmarks.yml' 'manifest.prod.yml' 'manifest.preprod.yml' 'manifest.test.yml' 'package.json' 'package-lock.json')
 for file in ${manifestFiles[@]} ; do
