@@ -15,6 +15,7 @@ module.exports = async () => {
       dialect: config.get('db.dialect'),
       dialectOptions: {
         ssl: config.get('db.ssl'),
+        rejectUnauthorized: config.get('db.rejectUnauthorized'),
       },
       migrationStorageTableSchema: 'cqc',
     },
@@ -23,6 +24,7 @@ module.exports = async () => {
       dialect: config.get('db.dialect'),
       dialectOptions: {
         ssl: config.get('db.ssl'),
+        rejectUnauthorized: config.get('db.rejectUnauthorized'),
       },
       migrationStorageTableSchema: 'cqc',
     },
@@ -39,6 +41,7 @@ module.exports = async () => {
       dialect: config.get('db.dialect'),
       dialectOptions: {
         ssl: config.get('db.ssl'),
+        rejectUnauthorized: config.get('db.rejectUnauthorized'),
       },
       migrationStorageTableSchema: 'cqc',
     },
